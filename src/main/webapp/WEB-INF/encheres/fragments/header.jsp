@@ -17,13 +17,9 @@
                     <c:otherwise>
                         <a href="" class="ml-2">Enchères</a>
                         <a href="" class="ml-2">Vendre un article</a>
-<<<<<<< HEAD
                         <a href="<%=request.getContextPath()%>/profil/" class="ml-2">Mon profil</a>
                         <a href="<%=request.getContextPath()%>" class="ml-2">Déconnexion</a>
-=======
-                        <a href="" class="ml-2">Mon profil</a>
-                        <a href="${pageContext.request.servletContext}" class="ml-2">Déconnexion</a>
->>>>>>> devseb
+
                     </c:otherwise>
                 </c:choose>
             </div>
