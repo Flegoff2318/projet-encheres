@@ -2,6 +2,13 @@ package bo;
 
 import java.time.LocalDate;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArticleVendu {
     private int noArticle;
     private String nomArticle;
