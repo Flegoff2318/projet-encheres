@@ -3,6 +3,11 @@ package bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 public class BLLException extends Exception{
     private List<String> errors = new ArrayList<>();
 
@@ -24,4 +29,8 @@ public class BLLException extends Exception{
                 "errors=" + errors +
                 '}';
     }
+    
+	public void ajouterErreur(String erreur) {
+		errors.add(erreur);
+	}	
 }
