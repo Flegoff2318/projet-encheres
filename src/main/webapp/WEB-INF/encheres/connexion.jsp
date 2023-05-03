@@ -4,7 +4,7 @@
 <body>
 <%@include file="fragments/header.jsp"%>
 <main>
-	<div class="container">
+	<div class="container justify-content-md-center">
 		<form>
 		<div class="row mb-4">
 			<input type="email" name="email" id="email" class="form-control" />

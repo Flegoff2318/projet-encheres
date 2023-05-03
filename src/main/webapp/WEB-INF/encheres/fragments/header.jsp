@@ -4,7 +4,7 @@
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">ENI - Enchères</a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>">ENI - Enchères</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,7 +17,7 @@
                     <c:otherwise>
                         <a href="" class="ml-2">Enchères</a>
                         <a href="" class="ml-2">Vendre un article</a>
-                        <a href="" class="ml-2">Mon profil</a>
+                        <a href="<%=request.getContextPath()%>/profil/" class="ml-2">Mon profil</a>
                         <a href="<%=request.getContextPath()%>" class="ml-2">Déconnexion</a>
                     </c:otherwise>
                 </c:choose>

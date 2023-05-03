@@ -4,7 +4,7 @@
 <body>
 	<%@include file="fragments/header.jsp"%>
 	<main>
-		<div class="container">
+		<div class="container justify-content-md-center">
 			<div class="row text-center">
 				<div class="col mt-5 b-5">
 					<h3>Liste des enchères</h3>
