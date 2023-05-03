@@ -10,5 +10,17 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/apache-tomcat-10.0.27"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/lombok.jar"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mssql-jdbc-11.2.3.jre17.jar"/>
+>>>>>>> devseb
+=======
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-3.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jakarta.servlet.jsp.jstl-3.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/bytes-0.4.6.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/bcrypt-0.4.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mssql-jdbc-11.2.3.jre17.jar"/>
+>>>>>>> devdavid
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
