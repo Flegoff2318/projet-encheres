@@ -1,15 +1,14 @@
 package ihm;
 
-import bo.Utilisateur;
-
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("")
-public class AccueilServlet extends HttpServlet {
+@WebServlet("/connexion")
+public class ConnexionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
@@ -18,7 +17,7 @@ public class AccueilServlet extends HttpServlet {
          utilisateur.setPrenom("gilbert");
          session.setAttribute("utilisateur",utilisateur);*/
         
-        request.getRequestDispatcher("/WEB-INF/encheres/accueil.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/encheres/connexion.jsp").forward(request,response);
     }
 
     @Override
