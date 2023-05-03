@@ -5,7 +5,8 @@ import java.util.List;
 import bo.Retrait;
 import dal.RetraitDAO;
 
-public class RetraitDAOImpl implements RetraitDAO{
+
+public class RetraitDAOImpl implements RetraitDAO {
 
 	@Override
 	public void insert(Retrait object) {
