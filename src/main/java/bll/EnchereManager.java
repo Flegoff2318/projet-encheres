@@ -35,6 +35,7 @@ public class EnchereManager {
 	public List<Enchere> selectionnerEncheres() {
 		return DAOFactory.getEnchereDAO().selectAll();
 	}
+	
 	public Enchere selectionnerEnchereParId(int id) {
 		return DAOFactory.getEnchereDAO().selectById(id);
 	}

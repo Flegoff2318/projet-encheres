@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import bll.CategorieManager;
 import bll.EnchereManager;
 import bll.UtilisateurManager;
 import bo.ArticleVendu;
@@ -29,6 +30,8 @@ public class Test extends HttpServlet {
 //		ArticleVendu a = new ArticleVendu();
 //		a.setNoArticle(2);
 //		Enchere enchere = new Enchere(LocalDateTime.now(), 800, u, a) ;		
+		System.out.println(CategorieManager.getInstance().selectionnerCategories());
+		System.out.println(CategorieManager.getInstance().selectionnerCategorieParId(2));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
