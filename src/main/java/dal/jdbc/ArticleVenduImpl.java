@@ -72,7 +72,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}				
+		}
 	}
 
 	@Override
@@ -109,6 +109,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 
 	@Override
 	public List<ArticleVendu> selectAll() {
+
 		try(Connection connection = ConnectionProvider.getConnection()){
 			List<ArticleVendu> articlesVendus = new ArrayList<>();
 			Statement stmt = connection.createStatement();
@@ -171,7 +172,4 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 		}		
 		return null;
 	}
-
-
-
 }

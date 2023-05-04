@@ -17,9 +17,19 @@
                     <c:otherwise>
                         <a href="" class="ml-2">Enchères</a>
                         <a href="" class="ml-2">Vendre un article</a>
+<<<<<<< HEAD
                         <a href="<%=request.getContextPath()%>/profil/" class="ml-2">Mon profil</a>
                         <a href="<%=request.getContextPath()%>" class="ml-2">Déconnexion</a>
 
+=======
+
+                        <a href="<%=request.getContextPath()%>/profil/" class="ml-2">Mon profil</a>
+                        <a href="<%=request.getContextPath()%>" class="ml-2">Déconnexion</a>
+
+                        <a href="" class="ml-2">Mon profil</a>
+                        <a href="<%= request.getContextPath() %>" class="ml-2">Déconnexion</a>
+
+>>>>>>> fa4afb0866cab5f3942a86ddc3a8ce7adc1549c5
                     </c:otherwise>
                 </c:choose>
             </div>

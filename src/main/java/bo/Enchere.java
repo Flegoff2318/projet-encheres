@@ -1,21 +1,18 @@
 package bo;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class Enchere {
-    private LocalTime dateEnchere;
+
+    private LocalDateTime dateEnchere;
     private int montant_enchere;
     private Utilisateur utilisateur;
     private ArticleVendu articleVendu;

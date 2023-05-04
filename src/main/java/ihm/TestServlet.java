@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet("/test")
+@WebServlet("/test2")
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

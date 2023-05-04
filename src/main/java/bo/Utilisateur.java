@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class Utilisateur {
     private int noUtilisateur;
     private String pseudo;
@@ -21,7 +20,6 @@ public class Utilisateur {
     private String motDePasse;
     private int credit;
     private boolean administrateur;
-
     
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
@@ -38,7 +36,4 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-    
-    
-
 }
