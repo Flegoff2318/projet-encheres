@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Retrait {
-    private int noArticle;
+    private ArticleVendu article;
     private String rue;
     private String code_postal;
     private String ville;
