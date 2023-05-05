@@ -25,7 +25,7 @@ public class EnchereManager {
 	
 	//inutilisé
 	public void supprimerEnchere(int id) {
-		DAOFactory.getEnchereDAO().delete(id);;
+		DAOFactory.getEnchereDAO().delete(id);
 	}
 	
 	public void modifierEnchere(Enchere enchere) {
