@@ -1,6 +1,6 @@
 package ihm;
 
-import bo.Utilisateur;
+
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -10,13 +10,16 @@ import java.io.IOException;
 
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
-    @Override
+  
+	private static final long serialVersionUID = 1L;
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-    	 HttpSession session = request.getSession();
-         Utilisateur utilisateur = new Utilisateur();
-         utilisateur.setPrenom("gilbert");
-         session.setAttribute("utilisateur",utilisateur);
+//    	 HttpSession session = request.getSession();
+//         Utilisateur utilisateur = new Utilisateur();
+//         utilisateur.setPrenom("gilbert");
+//         session.setAttribute("utilisateur",utilisateur);
         
         request.getRequestDispatcher("/WEB-INF/encheres/accueil.jsp").forward(request,response);
     }

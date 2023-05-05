@@ -32,5 +32,9 @@ public class BLLException extends Exception{
     
 	public void ajouterErreur(String erreur) {
 		errors.add(erreur);
+	}
+
+	public BLLException(String string) {
+		// TODO Auto-generated constructor stub
 	}	
 }

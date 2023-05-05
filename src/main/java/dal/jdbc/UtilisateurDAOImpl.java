@@ -32,6 +32,62 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final String SELECT_BY_ID = "SELECT * FROM utilisateurs "
 			+ "WHERE no_utilisateur = ?;";
 	
+	private static final String SELECT_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo = ?";
+	private static final String SELECT_BY_PSEUDO_OR_EMAIL = "SELECT * FROM utilisateurs WHERE pseudo = ? OR email = ?;";
+	
+	public Utilisateur selectByPseudo(String pseudo) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt =  connection.prepareStatement(SELECT_BY_PSEUDO);
+			pStmt.setString(1, pseudo);
+			ResultSet rs =pStmt.executeQuery();
+			if(rs.next())
+			return new Utilisateur(
+					rs.getInt("noUtilisateur"),
+					rs.getString("pseudo"),
+					rs.getString("nom"),
+					rs.getString("prenom"),
+					rs.getString("email"),
+					rs.getString("telephone"),
+					rs.getString("rue"),
+					rs.getString("codePostal"),
+					rs.getString("ville"),
+					rs.getString("motDePasse"),
+					rs.getInt("credit"),
+					rs.getBoolean("false")
+					);
+		}catch(SQLException e) {//DalException
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Utilisateur selectByPseudoOrEmail(String pseudo, String email) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt =  connection.prepareStatement(SELECT_BY_PSEUDO_OR_EMAIL);
+			pStmt.setString(1, pseudo);
+			pStmt.setString(2, email);
+			ResultSet rs =pStmt.executeQuery();
+			if(rs.next())
+			return new Utilisateur(
+					rs.getInt("noUtilisateur"),
+					rs.getString("pseudo"),
+					rs.getString("nom"),
+					rs.getString("prenom"),
+					rs.getString("email"),
+					rs.getString("telephone"),
+					rs.getString("rue"),
+					rs.getString("codePostal"),
+					rs.getString("ville"),
+					rs.getString("motDePasse"),
+					rs.getInt("credit"),
+					rs.getBoolean("false")
+					);
+		}catch(SQLException e) {//DalException
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		try (Connection connection = ConnectionProvider.getConnection()){
@@ -166,5 +222,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 		return null;
 	}
+
+
 
 }
