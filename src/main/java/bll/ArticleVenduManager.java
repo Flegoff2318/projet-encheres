@@ -57,4 +57,15 @@ public class ArticleVenduManager {
 			bll.ajouterErreur("Le champs %s ne peut pas etre vide!".formatted(name));
 		}
 	}
+	public List<ArticleVendu> listeArticlesRecherche(int categorie, String recherche) {
+		return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);		
+	}
+	public static List<ArticleVendu> choixListe(int categorie, String recherche) {
+		if(categorie ==0) {
+			return DAOFactory.getArticleVenduDao().selectKeyword(recherche);
+		}
+		else {
+			return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);
+		}
+	}
 }
