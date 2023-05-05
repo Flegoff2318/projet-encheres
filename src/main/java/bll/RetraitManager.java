@@ -33,4 +33,7 @@ public class RetraitManager {
     public void ajouterRetrait(Retrait retrait){
         DAOFactory.getRetraitDao().insert(retrait);
     }
+    public void supprimerRetraitsUtilisateur(int noUtilisateur){
+        DAOFactory.getRetraitDao().supprimerRetraitUtilisateur(noUtilisateur);
+    }
 }

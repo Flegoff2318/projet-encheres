@@ -2,13 +2,10 @@ package dal.jdbc;
 
 import bo.Enchere;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +20,11 @@ public class EnchereDAOImpl implements EnchereDAO{
 			+ "(no_utilisateur, no_article, date_enchere, montant_enchere) "
 			+ "VALUES (?,?,?,?);";
 	//inutilisé
-	private final String DELETE = "DELETE FROM encheres "
-			+ "WHERE no_article = ?";
+	private final String DELETE_AVEC_UTILISATEUR = "DELETE FROM encheres "
+			+ " WHERE no_utilisateur = ?";
+	private final String DELETE_AVEC_ARTICLE = "DELETE FROM encheres " +
+			" WHERE no_article " +
+			" IN (select no_article from ARTICLES_VENDUS where ARTICLES_VENDUS.no_utilisateur = ?);";
 	private final String UPDATE = "UPDATE encheres "
 			+ "SET date_enchere = ?, montant_enchere = ? "
 			+ "WHERE no_utilisateur = ? AND no_article = ?;";
@@ -66,7 +66,13 @@ public class EnchereDAOImpl implements EnchereDAO{
 
 	@Override
 	public void delete(int id) {
-		
+		try (Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(DELETE_AVEC_ARTICLE);
+			pstmt.setInt(1,id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	@Override
@@ -118,4 +124,14 @@ public class EnchereDAOImpl implements EnchereDAO{
 		return null;
 	}
 
+	@Override
+	public void supprimerAvecUtilisateur(int noUtilisateur) {
+		try (Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(DELETE_AVEC_UTILISATEUR);
+			pstmt.setInt(1,noUtilisateur);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

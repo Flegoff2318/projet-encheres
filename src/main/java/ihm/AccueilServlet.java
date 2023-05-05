@@ -22,8 +22,8 @@ public class AccueilServlet extends HttpServlet {
 
     	 HttpSession session = request.getSession();
          Utilisateur utilisateur = new Utilisateur();
-         utilisateur.setPrenom("gilbert");
-         utilisateur.setNoUtilisateur(6);
+         utilisateur.setPrenom("Alexandre");
+         utilisateur.setNoUtilisateur(28);
          session.setAttribute("utilisateur",utilisateur);
         
     	List<ArticleVendu> articles = ArticleVenduManager.getInstance().getAllArticleVendus();

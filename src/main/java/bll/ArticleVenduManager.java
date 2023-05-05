@@ -68,4 +68,7 @@ public class ArticleVenduManager {
 			return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);
 		}
 	}
+	public void supprimerArticlesUtilisateur(int noUtilisateur){
+		DAOFactory.getArticleVenduDao().deleteArticlesUtilisateur(noUtilisateur);
+	}
 }

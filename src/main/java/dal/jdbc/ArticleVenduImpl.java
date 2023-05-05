@@ -31,7 +31,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			+ ") VALUES (?,?,?,?,?,?,?,?,?); ";
 	
 	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?;";
-
+	private static final String DELETE_ARTICLES_UTILISATEUR = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ?;";
 	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS  SET ("
 			+ "nom_article = ?,"
 			+ "description = ?,"
@@ -172,6 +172,17 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			e.printStackTrace();
 		}		
 		return null;
+	}
+
+	@Override
+	public void deleteArticlesUtilisateur(int noUtilisateur) {
+		try (Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(DELETE_ARTICLES_UTILISATEUR);
+			pstmt.setInt(1,noUtilisateur);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

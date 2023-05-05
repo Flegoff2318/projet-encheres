@@ -11,3 +11,7 @@
 projet-encheres.iml
 .idea/
 /build/classes/classpath.index
+# eclipse
+.settings/
+.classpath
+.project

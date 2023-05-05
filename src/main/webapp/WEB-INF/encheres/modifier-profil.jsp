@@ -98,7 +98,7 @@
                     <input class="btn btn-primary btn-lg" type="submit" value="Enregistrer">
                 </div>
                 <div class="col col-lg-2">
-                    <a class="btn btn-danger btn-lg" href="<%=request.getContextPath()%>/">
+                    <a class="btn btn-danger btn-lg" onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ?')" href="<%=request.getContextPath()%>/profil/supprimer">
                         Supprimer mon compte
                     </a>
                 </div>

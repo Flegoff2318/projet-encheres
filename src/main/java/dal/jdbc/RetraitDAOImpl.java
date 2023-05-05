@@ -14,6 +14,13 @@ import dal.RetraitDAO;
 
 public class RetraitDAOImpl implements RetraitDAO {
 	private final String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?,?,?,?);";
+	private final String DELETE_RETRAITS_UTILISATEUR = "DELETE FROM RETRAITS " +
+			"WHERE EXISTS (" +
+			"              SELECT 1" +
+			"              FROM ARTICLES_VENDUS" +
+			"              WHERE no_utilisateur = ?" +
+			"                AND no_article = RETRAITS.no_article" +
+			"          );";
 	private final String SELECT_ALL = "SELECT R.rue,R.code_postal,R.ville," +
 			"U.no_utilisateur,U.pseudo,nom,prenom,email,telephone,U.rue,U.code_postal,U.ville,mot_de_passe,credit,administrateur," +
 			"C.no_categorie,C.libelle,\n" +
@@ -167,4 +174,14 @@ public class RetraitDAOImpl implements RetraitDAO {
 		return null;
 	}
 
+	@Override
+	public void supprimerRetraitUtilisateur(int noUtilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE_RETRAITS_UTILISATEUR);
+			pstmt.setInt(1,noUtilisateur);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

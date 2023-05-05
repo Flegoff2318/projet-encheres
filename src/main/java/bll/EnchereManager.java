@@ -22,10 +22,21 @@ public class EnchereManager {
 	public void ajouterEnchere(Enchere enchere) {
 		DAOFactory.getEnchereDAO().insert(enchere);
 	}
-	
-	//inutilisé
-	public void supprimerEnchere(int id) {
-		DAOFactory.getEnchereDAO().delete(id);
+
+	/**
+	 * supprime les enchères sur les articles de l'utilisateur concerné
+	 * @param id
+	 */
+	public void supprimerEnchereParArticle(int noUtilisateur) {
+		DAOFactory.getEnchereDAO().delete(noUtilisateur);
+	}
+
+	/**
+	 * Supprime les enchères d'un utilisateur sur les articles concernés
+	 * @param noUtilisateur
+	 */
+	public void supprimerEnchereParUtilisateur(int noUtilisateur) {
+		DAOFactory.getEnchereDAO().supprimerAvecUtilisateur(noUtilisateur);
 	}
 	
 	public void modifierEnchere(Enchere enchere) {
