@@ -5,11 +5,18 @@
 <%@include file="fragments/header.jsp"%>
 <main>
 	<div class="container justify-content-md-center">
-		<form>
+		<form method="post">
+		
+<!-- 		<div class="row mb-4"> -->
+<!-- 			<input type="email" name="email" id="email" class="form-control" /> -->
+<!-- 			<label class="form-label" for="email">Adresse e-mail</label> -->
+<!-- 		</div> -->
+
 		<div class="row mb-4">
-			<input type="email" name="email" id="email" class="form-control" />
-			<label class="form-label" for="email">Adresse e-mail</label>
+			<input type="text" name="pseudo" id="pseudo" class="form-control" />
+			<label class="form-label" for="pseudo">Pseudo</label>
 		</div>
+		
 		<div class="row mb-4">
 			<input type="password" name="motdepasse" id="motdepasse" class="form-control" />
 			<label class="form-label" for="motdepasse">Password</label>
@@ -25,7 +32,7 @@
 				<a href="#">Mot de passe oublié</a>
 			</div>
 		</div>
-		<button type="button" class="btn btn-primary btn-block mb-4">Se connecter</button>
+		<button type="submit" class="btn btn-primary btn-block mb-4">Se connecter</button>
 		<div class="text-center">
 			<p>
 				<a href="<%=request.getContextPath()%>/creer-compte">Créer un compte</a>

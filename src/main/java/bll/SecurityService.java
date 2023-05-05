@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityService {
+	
 	@Getter private static SecurityService instance = 
 			new SecurityService();
 
@@ -25,15 +26,16 @@ public class SecurityService {
 		DAOFactory.getUtilisateurDAO().insert(utilisateur);		
 	}
 
-	public Utilisateur Login(String pseudo,String motdepasse) throws BLLException {
+	public Utilisateur login(String pseudo, String motdepasse) throws BLLException {
 		
 		Utilisateur utilisateur = DAOFactory.getUtilisateurDAO().selectByPseudo(pseudo);
+
 		
 		if(pseudo == null) {
 			throw new BLLException();
 		}
 		
-		if(!motdepasse.equals(utilisateur.getMotDePasse())) {
+		if(!motdepasse.equals(utilisateur.getMotDePasse())) {			
 			throw new BLLException();
 		}
 		

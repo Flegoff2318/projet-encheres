@@ -31,14 +31,15 @@ public class ConnexionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		try {
-			String login = request.getParameter("email");
+			String login = request.getParameter("pseudo");
 			String motdepasse = request.getParameter("motdepasse");
-			Utilisateur utilisateur = SecurityService.getInstance().Login(login,motdepasse);
+			Utilisateur utilisateur = SecurityService.getInstance().login(login,motdepasse);
 			
 			//Creation session
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur",utilisateur);
 			response.sendRedirect(request.getContextPath()+"/test2");
+			
 		} catch (BLLException e) {
 			
 			e.printStackTrace();

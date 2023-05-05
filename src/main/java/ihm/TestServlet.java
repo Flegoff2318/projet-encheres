@@ -27,7 +27,7 @@ public class TestServlet extends HttpServlet {
 			return;
 		}
 		response.getWriter().append("Bonjour"+utilisateur.getPseudo() );		
-		System.out.println("mon compte");
+		System.out.println("je suis connecté");
 		
 		
 //		try {

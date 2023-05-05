@@ -42,18 +42,18 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			ResultSet rs =pStmt.executeQuery();
 			if(rs.next())
 			return new Utilisateur(
-					rs.getInt("noUtilisateur"),
+					rs.getInt("no_utilisateur"),
 					rs.getString("pseudo"),
 					rs.getString("nom"),
 					rs.getString("prenom"),
 					rs.getString("email"),
 					rs.getString("telephone"),
 					rs.getString("rue"),
-					rs.getString("codePostal"),
+					rs.getString("code_postal"),
 					rs.getString("ville"),
-					rs.getString("motDePasse"),
+					rs.getString("mot_de_passe"),
 					rs.getInt("credit"),
-					rs.getBoolean("false")
+					rs.getBoolean("administrateur")
 					);
 		}catch(SQLException e) {//DalException
 			e.printStackTrace();
@@ -69,18 +69,18 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			ResultSet rs =pStmt.executeQuery();
 			if(rs.next())
 			return new Utilisateur(
-					rs.getInt("noUtilisateur"),
+					rs.getInt("no_utilisateur"),
 					rs.getString("pseudo"),
 					rs.getString("nom"),
 					rs.getString("prenom"),
 					rs.getString("email"),
 					rs.getString("telephone"),
 					rs.getString("rue"),
-					rs.getString("codePostal"),
+					rs.getString("code_postal"),
 					rs.getString("ville"),
-					rs.getString("motDePasse"),
+					rs.getString("mot_de_passe"),
 					rs.getInt("credit"),
-					rs.getBoolean("false")
+					rs.getBoolean("administrateur")
 					);
 		}catch(SQLException e) {//DalException
 			e.printStackTrace();
