@@ -58,4 +58,22 @@ public class CategorieDAOImpl implements CategorieDAO{
 		return null;
 	}
 
+	@Override
+	public void insert(Categorie object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Categorie object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

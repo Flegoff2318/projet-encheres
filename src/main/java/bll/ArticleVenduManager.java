@@ -3,6 +3,7 @@ package bll;
 
 import java.util.List;
 
+
 import bo.ArticleVendu;
 
 import dal.DAOFactory;
