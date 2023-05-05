@@ -88,7 +88,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			pStmt.executeUpdate();
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if(rs.next()) {
-				articleVendu.setNoArticle(1);
+				articleVendu.setNoArticle(rs.getInt(1));
 			}
 			
 		}catch (SQLException e) {

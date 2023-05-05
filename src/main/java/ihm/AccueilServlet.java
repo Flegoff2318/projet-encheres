@@ -13,17 +13,15 @@ import java.util.List;
 
 import bll.ArticleVenduManager;
 import bll.CategorieManager;
+import bll.UtilisateurManager;
 
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-
     	 HttpSession session = request.getSession();
-         Utilisateur utilisateur = new Utilisateur();
-         utilisateur.setPrenom("gilbert");
-         utilisateur.setNoUtilisateur(6);
+         Utilisateur utilisateur = UtilisateurManager.getInstance().selectionnerUtilisateurParId(6);
          session.setAttribute("utilisateur",utilisateur);
         
     	List<ArticleVendu> articles = ArticleVenduManager.getInstance().getAllArticleVendus();

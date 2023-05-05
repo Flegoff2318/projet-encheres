@@ -40,8 +40,8 @@ public class RetraitDAOImpl implements RetraitDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT);
 			pstmt.setInt(1,retrait.getArticle().getNoArticle());
 			pstmt.setString(2,retrait.getRue());
-			pstmt.setString(2,retrait.getCode_postal());
-			pstmt.setString(2,retrait.getVille());
+			pstmt.setString(3,retrait.getCode_postal());
+			pstmt.setString(4,retrait.getVille());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
