@@ -20,8 +20,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, "
 			+ "mot_de_passe, credit, administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+	
 	private final String DELETE = "DELETE FROM utilisateurs "
 			+ "WHERE no_utilisateur = ?";	
+	
 	private final String UPDATE = "UPDATE utilisateurs "
 			+ "SET pseudo = ?, nom = ?, prenom = ?, email = ?,"
 			+ "telephone = ?, rue = ?, code_postal = ?, ville = ?, "
@@ -29,6 +31,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			+ "WHERE no_utilisateur = ?;";
 	
 	private final String SELECT_ALL = "SELECT * FROM utilisateurs;";
+	
 	private final String SELECT_BY_ID = "SELECT * FROM utilisateurs "
 			+ "WHERE no_utilisateur = ?;";
 	

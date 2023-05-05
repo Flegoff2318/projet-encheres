@@ -26,12 +26,12 @@ public class SecurityService {
 		DAOFactory.getUtilisateurDAO().insert(utilisateur);		
 	}
 
-	public Utilisateur login(String pseudo, String motdepasse) throws BLLException {
+	public Utilisateur login(String login, String motdepasse) throws BLLException {
 		
-		Utilisateur utilisateur = DAOFactory.getUtilisateurDAO().selectByPseudo(pseudo);
+		Utilisateur utilisateur = DAOFactory.getUtilisateurDAO().selectByPseudo(login);
 
 		
-		if(pseudo == null) {
+		if(login == null) {
 			throw new BLLException();
 		}
 		

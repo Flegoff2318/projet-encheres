@@ -32,6 +32,8 @@ public class ConnexionServlet extends HttpServlet {
 				
 		try {
 			String login = request.getParameter("pseudo");
+			//String email = request.getParameter("email");
+			
 			String motdepasse = request.getParameter("motdepasse");
 			Utilisateur utilisateur = SecurityService.getInstance().login(login,motdepasse);
 			
