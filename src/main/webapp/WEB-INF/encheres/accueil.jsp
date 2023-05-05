@@ -17,13 +17,17 @@
 						<div class="col-6">
 							<div class="p-3">
 								<input class="form-control me-sm-2" type="search"
-									placeholder="Le nom de l'article contient"> <label
+									placeholder="Le nom de l'article contient" name="recherche"> <label
 									for="categorie" class="mt-2">Catégorie : </label> <select
 									class="form-select" id="categorie" name="categorie">
-									<option>Informatique</option>
-									<option>Ameublement</option>
-									<option>Vêtement</option>
-									<option>Sport & Loisir</option>
+									<option selected value="0">
+											Toutes
+										</option>
+									<c:forEach var="categorie" items="${categories}">
+										<option value="${categorie.noCategorie}">
+											${categorie.libelle}
+										</option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
@@ -95,35 +99,32 @@
 				</fieldset>
 			</form>
 			<div class="row gy-5">
-				<div class="col-6">
-					<div>
-						<img alt="placeholder"
-							src="https://placehold.co/300x300/green/white">
+				<c:forEach var="article" items="${articles}">
+					<!--  if >2 alors on passe a la ligne -->
+					<div class="col-6">
+						<div>
+							<img alt="placeholder"
+								src="https://placehold.co/300x300/green/white">
+						</div>
+						<div class="p-3">
+							<p>
+								<a href="#">${article.nomArticle}</a>
+							</p>
+							<p>Prix : ${article.prixVente}</p>
+							<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
+							<p> Vendeur : 
+								<c:choose>
+									<c:when test="${sessionScope.utilisateur != null}">
+										<a href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
+									</c:when>
+									<c:otherwise>
+										${article.utilisateur.pseudo}
+									</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
 					</div>
-					<div class="p-3">
-						<p>
-							<a href="#">PC Gamer pour travailler</a>
-						</p>
-						<p>Prix : 210 points</p>
-						<p>Fin de l'enchère : 10/08/2018</p>
-						<p>Vendeur : jojo44</p>
-					</div>
-				</div>
-
-				<div class="col-6">
-					<div>
-						<img alt="placeholder"
-							src="https://placehold.co/300x300/green/white">
-					</div>
-					<div class="p-3">
-						<p>
-							<a href="#">Rocket stove pour riz et pâtes</a>
-						</p>
-						<p>Prix : 185 points</p>
-						<p>Fin de l'enchère : 09/10/2018</p>
-						<p>Vendeur : NineJea</p>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</main>
