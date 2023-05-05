@@ -56,7 +56,7 @@
                 </table>
                 <div class="row mt-5 justify-content-md-center">
                     <label class="ml-3" for="proposition">Ma proposition : </label>
-                    <input class="ml-3" type="number" id="proposition" name="proposition" min="100">
+                    <input class="ml-3" type="number" id="proposition" name="proposition" min="${enchereMin}" value="${enchereMin}">
                     <button>Enchérir</button>
 
                 </div>

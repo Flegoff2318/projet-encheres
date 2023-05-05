@@ -14,6 +14,7 @@ public class EncherirServlet extends HttpServlet {
 		 //int idArticle = Integer.parseInt(request.getPathInfo().substring(1));
 		 //ArticleVendu articleVendu = ArticleVenduManager.getInstance().getArticleVendu(idArticle);
 		 //request.setAttribute("articleVendu",articleVendu);
+		request.setAttribute("enchereMin",120);
 		 request.getRequestDispatcher("/WEB-INF/encheres/encherir.jsp").forward(request,response);
 	}
 
