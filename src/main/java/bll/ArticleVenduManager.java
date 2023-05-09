@@ -68,4 +68,13 @@ public class ArticleVenduManager {
 			return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);
 		}
 	}
+	
+	public List<ArticleVendu> choixListe(int categorie, String recherche, int noUtilisateur){
+		if(categorie==0) {
+			return DAOFactory.getArticleVenduDao().selectKeywordUser(recherche, noUtilisateur);
+		}
+		else {
+			return DAOFactory.getArticleVenduDao().selectSearchUser(categorie, recherche, noUtilisateur);
+		}
+	}
 }

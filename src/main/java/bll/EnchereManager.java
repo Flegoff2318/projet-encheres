@@ -2,6 +2,7 @@ package bll;
 
 import java.util.List;
 
+import bo.ArticleVendu;
 import bo.Enchere;
 import dal.DAOFactory;
 
@@ -36,7 +37,30 @@ public class EnchereManager {
 		return DAOFactory.getEnchereDAO().selectAll();
 	}
 	
+	public List<Enchere> selectionnerEncheresArticle(int noArticle) {
+		return DAOFactory.getEnchereDAO().selectByArticle(noArticle);
+	}
+	
+	public List<Enchere> selectionnerEncheresUtilisateur(int noUtilisateur) {
+		return DAOFactory.getEnchereDAO().selectByUtilisateur(noUtilisateur);
+	}
+	public List<Enchere> selectionnerEncheresRecherche(int noCategorie, String recherche, int noUtilisateur) {
+		return DAOFactory.getEnchereDAO().selectSearch(noCategorie, recherche, noUtilisateur);
+	}
+	public List<Enchere> selectionnerEncheresMotCle(String recherche, int noUtilisateur) {
+		return DAOFactory.getEnchereDAO().selectKeyword(recherche, noUtilisateur);
+	}
+	
 	public Enchere selectionnerEnchereParId(int id) {
 		return DAOFactory.getEnchereDAO().selectById(id);
+	}
+	
+	public List<Enchere> choixListe(int categorie, String recherche, int noUtilisateur) {
+		if(categorie ==0) {
+			return DAOFactory.getEnchereDAO().selectKeyword(recherche, noUtilisateur);
+		}
+		else {
+			return DAOFactory.getEnchereDAO().selectSearch(categorie, recherche, noUtilisateur);
+		}
 	}
 }
