@@ -20,8 +20,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, "
 			+ "mot_de_passe, credit, administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+	
 	private final String DELETE = "DELETE FROM utilisateurs "
 			+ "WHERE no_utilisateur = ?";	
+	
 	private final String UPDATE = "UPDATE utilisateurs "
 			+ "SET pseudo = ?, nom = ?, prenom = ?, email = ?,"
 			+ "telephone = ?, rue = ?, code_postal = ?, ville = ?, "
@@ -29,8 +31,65 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			+ "WHERE no_utilisateur = ?;";
 	
 	private final String SELECT_ALL = "SELECT * FROM utilisateurs;";
+	
 	private final String SELECT_BY_ID = "SELECT * FROM utilisateurs "
 			+ "WHERE no_utilisateur = ?;";
+	
+	private static final String SELECT_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo = ?";
+	private static final String SELECT_BY_PSEUDO_OR_EMAIL = "SELECT * FROM utilisateurs WHERE pseudo = ? OR email = ?;";
+	
+	public Utilisateur selectByPseudo(String pseudo) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt =  connection.prepareStatement(SELECT_BY_PSEUDO);
+			pStmt.setString(1, pseudo);
+			ResultSet rs =pStmt.executeQuery();
+			if(rs.next())
+			return new Utilisateur(
+					rs.getInt("no_utilisateur"),
+					rs.getString("pseudo"),
+					rs.getString("nom"),
+					rs.getString("prenom"),
+					rs.getString("email"),
+					rs.getString("telephone"),
+					rs.getString("rue"),
+					rs.getString("code_postal"),
+					rs.getString("ville"),
+					rs.getString("mot_de_passe"),
+					rs.getInt("credit"),
+					rs.getBoolean("administrateur")
+					);
+		}catch(SQLException e) {//DalException
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Utilisateur selectByPseudoOrEmail(String pseudo, String email) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt =  connection.prepareStatement(SELECT_BY_PSEUDO_OR_EMAIL);
+			pStmt.setString(1, pseudo);
+			pStmt.setString(2, email);
+			ResultSet rs =pStmt.executeQuery();
+			if(rs.next())
+			return new Utilisateur(
+					rs.getInt("no_utilisateur"),
+					rs.getString("pseudo"),
+					rs.getString("nom"),
+					rs.getString("prenom"),
+					rs.getString("email"),
+					rs.getString("telephone"),
+					rs.getString("rue"),
+					rs.getString("code_postal"),
+					rs.getString("ville"),
+					rs.getString("mot_de_passe"),
+					rs.getInt("credit"),
+					rs.getBoolean("administrateur")
+					);
+		}catch(SQLException e) {//DalException
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -166,5 +225,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 		return null;
 	}
+
+
 
 }
