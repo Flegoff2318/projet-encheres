@@ -19,7 +19,6 @@
                         <a href="" class="ml-2">Vendre un article</a>
                         <a href="<%=request.getContextPath()%>/profil/" class="ml-2">Mon profil</a>
                         <a href="<%=request.getContextPath()%>" class="ml-2">Déconnexion</a>
-                    </c:otherwise>
                 </c:choose>
             </div>
         </div>

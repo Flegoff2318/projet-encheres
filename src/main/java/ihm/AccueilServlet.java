@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+import bo.Utilisateur;
+
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
   
