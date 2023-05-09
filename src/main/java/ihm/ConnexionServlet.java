@@ -18,11 +18,7 @@ import bo.Utilisateur;
 public class ConnexionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	 /*HttpSession session = request.getSession();
-         Utilisateur utilisateur = new Utilisateur();
-         utilisateur.setPrenom("gilbert");
-         session.setAttribute("utilisateur",utilisateur);*/
+            	
         System.out.println("servlet connexion");
         request.getRequestDispatcher("/WEB-INF/encheres/connexion.jsp").forward(request,response);
     }
@@ -40,7 +36,7 @@ public class ConnexionServlet extends HttpServlet {
 			//Creation session
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur",utilisateur);
-			response.sendRedirect(request.getContextPath()+"/test2");
+			response.sendRedirect(request.getContextPath()+"/");
 			
 		} catch (BLLException e) {
 			
