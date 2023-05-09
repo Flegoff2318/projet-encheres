@@ -13,6 +13,8 @@ import java.util.List;
 import bll.ArticleVenduManager;
 import bll.CategorieManager;
 
+import bo.Utilisateur;
+
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
   

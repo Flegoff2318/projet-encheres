@@ -34,12 +34,12 @@ public class ConnexionServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur",utilisateur);
 			response.sendRedirect(request.getContextPath());
+
 			
 		} catch (BLLException e) {
 			
 			e.printStackTrace();
 		}
-		
-		System.out.println("connected");
+
     }
 }
