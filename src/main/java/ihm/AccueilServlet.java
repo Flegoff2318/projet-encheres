@@ -23,7 +23,7 @@ public class AccueilServlet extends HttpServlet {
     	 HttpSession session = request.getSession();
          Utilisateur utilisateur = new Utilisateur();
          utilisateur.setPrenom("Alexandre");
-         utilisateur.setNoUtilisateur(28);
+         utilisateur.setNoUtilisateur(29);
          session.setAttribute("utilisateur",utilisateur);
         
     	List<ArticleVendu> articles = ArticleVenduManager.getInstance().getAllArticleVendus();

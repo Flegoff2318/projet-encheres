@@ -17,13 +17,13 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="pseudo">Pseudo</label> <input
                             type="text" class="form-control" name="pseudo"
-                            placeholder="Pseudo" id="pseudo">
+                            value="${utilisateur.pseudo}" id="pseudo">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="nom">Nom</label> <input
-                            type="text" class="form-control" name="nom" placeholder="Nom"
+                            type="text" class="form-control" name="nom" value="${utilisateur.nom}"
                             id="nom">
                     </div>
                 </div>
@@ -33,14 +33,14 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="prenom">Prénom</label> <input
                             type="text" class="form-control" name="prenom"
-                            placeholder="Prénom" id="prenom">
+                            value="${utilisateur.prenom}" id="prenom">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="email">Email</label> <input
                             type="email" class="form-control" name="email"
-                            placeholder="Email" id="email">
+                            value="${utilisateur.email}" id="email">
                     </div>
                 </div>
             </div>
@@ -49,13 +49,13 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="telephone">Téléphone</label>
                         <input type="text" class="form-control" name="telephone"
-                               placeholder="Téléphone" id="telephone">
+                               value="${utilisateur.telephone}" id="telephone">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="rue">Rue</label> <input
-                            type="text" class="form-control" name="rue" placeholder="Rue"
+                            type="text" class="form-control" name="rue" value="${utilisateur.rue}"
                             id="rue">
                     </div>
                 </div>
@@ -65,14 +65,14 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="codepostal">Code
                             postal</label> <input type="text" class="form-control"
-                                                  name="codepostal" placeholder="Code postal" id="codepostal">
+                                                  name="codepostal" value="${utilisateur.codePostal}" id="codepostal">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="ville">Ville</label> <input
                             type="text" class="form-control" name="ville"
-                            placeholder="Ville" id="ville">
+                            value="${utilisateur.ville}" id="ville">
                     </div>
                 </div>
             </div>

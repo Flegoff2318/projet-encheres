@@ -73,7 +73,7 @@
 			<c:if test="${sessionScope.utilisateur.noUtilisateur==requestScope.utilisateur.noUtilisateur}">
 			<div class="row justify-content-md-center mt-5">
 				<div class="col col-lg-2">
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/profil/modifier/">Modifier</a>
+					<a class="btn btn-primary" href="<%=request.getContextPath()%>/profil/modifier/${sessionScope.utilisateur.noUtilisateur}">Modifier</a>
 				</div>
 			</div>
 			</c:if>
