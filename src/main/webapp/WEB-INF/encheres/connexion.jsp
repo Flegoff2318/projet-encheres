@@ -15,14 +15,6 @@ String message = (String) request.getAttribute("message");
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					<strong>${message}</strong>
 					${sessionScope.utilisateur.noUtilisateur==requestScope.utilisateur.noUtilisateur}
-					<c:choose>
-						<c:when test="">
-
-						</c:when>
-						<c:otherwise>
-
-						</c:otherwise>
-					</c:choose>
 				</div>
 			</div>
 		</c:if>

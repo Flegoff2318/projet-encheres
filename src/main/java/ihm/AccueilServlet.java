@@ -20,14 +20,7 @@ public class AccueilServlet extends HttpServlet {
 
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-
-    	 HttpSession session = request.getSession();
-         Utilisateur utilisateur = new Utilisateur();
-         utilisateur.setPrenom("Alexandre");
-         utilisateur.setNoUtilisateur(29);
-         session.setAttribute("utilisateur",utilisateur);
-        
+                
     	List<ArticleVendu> articles = ArticleVenduManager.getInstance().getAllArticleVendus();
     	List<Categorie> categories = CategorieManager.getInstance().selectionnerCategories();
     	request.setAttribute("categories", categories);

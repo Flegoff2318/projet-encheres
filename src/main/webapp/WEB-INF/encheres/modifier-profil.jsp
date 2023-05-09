@@ -10,6 +10,14 @@
             <h3>Mon profil</h3>
         </div>
     </div>
+    <c:if test="${erreur!=null}">
+        <div class="row mb-4 mt-5 justify-content-md-center">
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+                <strong>${erreur}</strong>       
+            </div>
+        </div>
+    </c:if>
     <form action="" method="post">
         <fieldset>
             <div class="row justify-content-md-center">
@@ -91,6 +99,9 @@
                                id="confirmation">
                     </div>
                 </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <span>Crédits : ${utilisateur.credit}</span>
             </div>
 
             <div class="row justify-content-md-center">
