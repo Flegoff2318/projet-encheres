@@ -24,7 +24,7 @@
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-info">
+								<div class="p-3 bg-secondary">
 									<p>
 										<a href="#">${enchere.articleVendu.nomArticle}</a>
 									</p>
@@ -66,32 +66,34 @@
 					</c:forEach>
 					<!-- 1er bouton de gauche appuyé -->
 					<c:forEach var="article" items="${articles}">
-						<!--  if >2 alors on passe a la ligne -->
-						<div class="col-6">
-							<div>
-								<img alt="placeholder"
-									src="https://placehold.co/300x300/green/white">
-							</div>
-							<div class="p-3">
-								<p>
-									<a href="#">${article.nomArticle}</a>
-								</p>
-								<p>Prix : ${article.prixVente}</p>
-								<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-								<p>
-									Vendeur :
-									<c:choose>
-										<c:when test="${sessionScope.utilisateur != null}">
-											<a
-												href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
-										</c:when>
-										<c:otherwise>
+						<c:if test="${article.etatVente==1}">
+							<!--  if >2 alors on passe a la ligne -->
+							<div class="col-6">
+								<div>
+									<img alt="placeholder"
+										src="https://placehold.co/300x300/green/white">
+								</div>
+								<div class="p-3">
+									<p>
+										<a href="#">${article.nomArticle}</a>
+									</p>
+									<p>Prix : ${article.prixVente}</p>
+									<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
+									<p>
+										Vendeur :
+										<c:choose>
+											<c:when test="${sessionScope.utilisateur != null}">
+												<a
+													href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
+											</c:when>
+											<c:otherwise>
 										${article.utilisateur.pseudo}
 									</c:otherwise>
-									</c:choose>
-								</p>
+										</c:choose>
+									</p>
+								</div>
 							</div>
-						</div>
+						</c:if>
 					</c:forEach>
 					<!-- 1er bouton de droite appuyé -->
 					<c:forEach var="article" items="${ventesUtilisateur}">
@@ -102,7 +104,7 @@
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-light">
+								<div class="p-3 bg-info">
 									<p>
 										<a href="#">${article.nomArticle}</a>
 									</p>
@@ -125,7 +127,7 @@
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-dark">
+								<div class="p-3 bg-light">
 									<p>
 										<a href="#">${article.nomArticle}</a>
 									</p>
@@ -148,7 +150,7 @@
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-primary">
+								<div class="p-3 bg-white">
 									<p>
 										<a href="#">${article.nomArticle}</a>
 									</p>
