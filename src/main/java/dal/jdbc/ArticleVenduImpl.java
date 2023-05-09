@@ -62,6 +62,17 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 	private static final String SELECT_KEYWORD = 
 			SELECT_ALL_ARTICLE
 			+ "WHERE nom_article like ?;";
+	
+	private static final String SELECT_SEARCH_USER = 
+			SELECT_ALL_ARTICLE
+			+ "WHERE a.no_categorie = ? "
+			+ "and nom_article like ? "
+			+ "and a.no_utilisateur = ?;";
+	
+	private static final String SELECT_KEYWORD_USER = 
+			SELECT_ALL_ARTICLE
+			+ "WHERE nom_article like ? "
+			+ "and a.no_utilisateur = ?;";
 
 	private static final String SELECT_ONE_ARTICLE = 
 			SELECT_ALL_ARTICLE
@@ -88,7 +99,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			pStmt.executeUpdate();
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if(rs.next()) {
-				articleVendu.setNoArticle(1);
+				articleVendu.setNoArticle(rs.getInt(1));
 			}
 			
 		}catch (SQLException e) {
@@ -201,10 +212,41 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 		
 	}
 	
+	public List<ArticleVendu> selectSearchUser(int categorie, String recherche, int noUtilisateur) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_SEARCH_USER);
+			pstmt.setInt(1, categorie);
+			pstmt.setString(2, "%"+recherche+"%");
+			pstmt.setInt(3, noUtilisateur);
+			ResultSet rs = pstmt.executeQuery();
+			return recupListeArticle(rs);
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return null;
+		
+	}
+	
 	public List<ArticleVendu> selectKeyword(String recherche) {
 		try(Connection connection = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = connection.prepareStatement(SELECT_KEYWORD);
 			pstmt.setString(1, "%"+recherche+"%");
+			ResultSet rs = pstmt.executeQuery();
+			return recupListeArticle(rs);
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return null;
+		
+	}
+	
+	public List<ArticleVendu> selectKeywordUser(String recherche, int noUtilisateur) {
+		try(Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_KEYWORD_USER);
+			pstmt.setString(1, "%"+recherche+"%");
+			pstmt.setInt(2, noUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
 			return recupListeArticle(rs);
 			
