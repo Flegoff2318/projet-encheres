@@ -10,6 +10,14 @@
             <h3>Mon profil</h3>
         </div>
     </div>
+    <c:if test="${erreur!=null}">
+        <div class="row mb-4 mt-5 justify-content-md-center">
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+                <strong>${erreur}</strong>       
+            </div>
+        </div>
+    </c:if>
     <form action="" method="post">
         <fieldset>
             <div class="row justify-content-md-center">
@@ -17,13 +25,13 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="pseudo">Pseudo</label> <input
                             type="text" class="form-control" name="pseudo"
-                            placeholder="Pseudo" id="pseudo">
+                            value="${utilisateur.pseudo}" id="pseudo">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="nom">Nom</label> <input
-                            type="text" class="form-control" name="nom" placeholder="Nom"
+                            type="text" class="form-control" name="nom" value="${utilisateur.nom}"
                             id="nom">
                     </div>
                 </div>
@@ -33,14 +41,14 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="prenom">Prénom</label> <input
                             type="text" class="form-control" name="prenom"
-                            placeholder="Prénom" id="prenom">
+                            value="${utilisateur.prenom}" id="prenom">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="email">Email</label> <input
                             type="email" class="form-control" name="email"
-                            placeholder="Email" id="email">
+                            value="${utilisateur.email}" id="email">
                     </div>
                 </div>
             </div>
@@ -49,13 +57,13 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="telephone">Téléphone</label>
                         <input type="text" class="form-control" name="telephone"
-                               placeholder="Téléphone" id="telephone">
+                               value="${utilisateur.telephone}" id="telephone">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="rue">Rue</label> <input
-                            type="text" class="form-control" name="rue" placeholder="Rue"
+                            type="text" class="form-control" name="rue" value="${utilisateur.rue}"
                             id="rue">
                     </div>
                 </div>
@@ -65,14 +73,14 @@
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="codepostal">Code
                             postal</label> <input type="text" class="form-control"
-                                                  name="codepostal" placeholder="Code postal" id="codepostal">
+                                                  name="codepostal" value="${utilisateur.codePostal}" id="codepostal">
                     </div>
                 </div>
                 <div class="col col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label mt-4" for="ville">Ville</label> <input
                             type="text" class="form-control" name="ville"
-                            placeholder="Ville" id="ville">
+                            value="${utilisateur.ville}" id="ville">
                     </div>
                 </div>
             </div>
@@ -92,13 +100,16 @@
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-md-center">
+                <span>Crédits : ${utilisateur.credit}</span>
+            </div>
 
             <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
                     <input class="btn btn-primary btn-lg" type="submit" value="Enregistrer">
                 </div>
                 <div class="col col-lg-2">
-                    <a class="btn btn-danger btn-lg" href="<%=request.getContextPath()%>/">
+                    <a class="btn btn-danger btn-lg" onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ?')" href="<%=request.getContextPath()%>/profil/supprimer">
                         Supprimer mon compte
                     </a>
                 </div>

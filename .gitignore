@@ -11,4 +11,11 @@
 projet-encheres.iml
 .idea/
 /build/classes/classpath.index
+<<<<<<< HEAD
+=======
+# eclipse
+.settings/
+.classpath
+.project
+>>>>>>> main
 /bin/
