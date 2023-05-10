@@ -3,6 +3,7 @@ package bll;
 
 import java.util.List;
 
+
 import bo.ArticleVendu;
 
 import dal.DAOFactory;
@@ -55,5 +56,30 @@ public class ArticleVenduManager {
 		if(name.isBlank()) {
 			bll.ajouterErreur("Le champs %s ne peut pas etre vide!".formatted(name));
 		}
+	}
+	public List<ArticleVendu> listeArticlesRecherche(int categorie, String recherche) {
+		return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);		
+	}
+	public static List<ArticleVendu> choixListe(int categorie, String recherche) {
+		if(categorie ==0) {
+			return DAOFactory.getArticleVenduDao().selectKeyword(recherche);
+		}
+		else {
+			return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);
+		}
+	}
+
+	public void supprimerArticlesUtilisateur(int noUtilisateur) {
+		DAOFactory.getArticleVenduDao().deleteArticlesUtilisateur(noUtilisateur);
+	}
+	
+	public List<ArticleVendu> choixListe(int categorie, String recherche, int noUtilisateur){
+		if(categorie==0) {
+			return DAOFactory.getArticleVenduDao().selectKeywordUser(recherche, noUtilisateur);
+		}
+		else {
+			return DAOFactory.getArticleVenduDao().selectSearchUser(categorie, recherche, noUtilisateur);
+		}
+
 	}
 }

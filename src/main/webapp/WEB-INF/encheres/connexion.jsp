@@ -1,9 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String message = (String) request.getAttribute("message");
+%>
 <html>
 <%@include file="fragments/head.jsp"%>
 <body>
 <%@include file="fragments/header.jsp"%>
 <main>
+	<div class="container">
+		<c:if test="${message!=null}">
+			<div class="row mb-4 mt-5 justify-content-md-center">
+				<div class="alert alert-dismissible alert-success">
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					<strong>${message}</strong>
+					${sessionScope.utilisateur.noUtilisateur==requestScope.utilisateur.noUtilisateur}
+				</div>
+			</div>
+		</c:if>
 	<div class="container justify-content-md-center">
 		<form method="post">
 		

@@ -10,7 +10,7 @@
 					<p>Pseudo :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p><strong>le pseudo</strong></p>
+					<p><strong>${utilisateur.pseudo}</strong></p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -18,7 +18,7 @@
 					<p>Nom :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>le nom</p>
+					<p>${utilisateur.nom}</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -26,7 +26,7 @@
 					<p>Prénom :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>le prénom</p>
+					<p>${utilisateur.prenom}</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -34,7 +34,7 @@
 					<p>Email :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>l'adresse email</p>
+					<p>${utilisateur.email}</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -42,7 +42,7 @@
 					<p>Téléphone :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>le numéro de téléphone</p>
+					<p>${utilisateur.telephone}</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -50,7 +50,7 @@
 					<p>Rue :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>la rue</p>
+					<p>${utilisateur.rue}</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -58,7 +58,7 @@
 					<p>Code postal :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>le code postal</p>
+					<p>${utilisateur.codePostal}</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -66,13 +66,14 @@
 					<p>Ville :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p>nom de la ville</p>
+					<p>${utilisateur.ville}</p>
 				</div>
 			</div>
-			<c:if test="${ utilisateur!=null }">
+			
+			<c:if test="${sessionScope.utilisateur.noUtilisateur==requestScope.utilisateur.noUtilisateur}">
 			<div class="row justify-content-md-center mt-5">
 				<div class="col col-lg-2">
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/profil/modifier/">Modifier</a>
+					<a class="btn btn-primary" href="<%=request.getContextPath()%>/profil/modifier/${sessionScope.utilisateur.noUtilisateur}">Modifier</a>
 				</div>
 			</div>
 			</c:if>

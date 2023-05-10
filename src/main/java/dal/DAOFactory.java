@@ -1,9 +1,6 @@
 package dal;
 
-import dal.jdbc.ArticleVenduImpl;
-import dal.jdbc.CategorieDAOImpl;
-import dal.jdbc.EnchereDAOImpl;
-import dal.jdbc.UtilisateurDAOImpl;
+import dal.jdbc.*;
 
 public class DAOFactory {
 
@@ -21,5 +18,9 @@ public class DAOFactory {
 	
 	public static ArticleVenduDAO getArticleVenduDao() {
 		return  new ArticleVenduImpl();
-	} 
+	}
+
+	public static RetraitDAO getRetraitDao(){
+		return new RetraitDAOImpl();
+	}
 }
