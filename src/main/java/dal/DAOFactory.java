@@ -23,4 +23,6 @@ public class DAOFactory {
 	public static RetraitDAO getRetraitDao(){
 		return new RetraitDAOImpl();
 	}
+
+	public static TokenDAO getTokenDao(){ return new TokenDAOImpl(); }
 }

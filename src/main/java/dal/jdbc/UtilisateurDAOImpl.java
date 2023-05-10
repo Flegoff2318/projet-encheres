@@ -1,5 +1,6 @@
 package dal.jdbc;
 
+import bo.Token;
 import bo.Utilisateur;
 import dal.UtilisateurDAO;
 
@@ -15,6 +16,7 @@ import config.ConnectionProvider;
 import dal.UtilisateurDAO;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
+	private final String SELECT_USER_BY_TOKEN = "select no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur from UTILISATEURS u inner join TOKENS t on u.no_utilisateur=t.no_utilisateur where t.user_token=? and t.password_token=?;";
 
 	private final String INSERT = "INSERT INTO utilisateurs "
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, "
@@ -227,5 +229,20 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 
-
+	@Override
+	public Utilisateur selectByToken(Token token) {
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_USER_BY_TOKEN);
+			pstmt.setString(1, token.getUserToken());
+			pstmt.setString(2,token.getPasswordToken());
+			pstmt.executeQuery();
+			ResultSet rs = pstmt.getResultSet();
+			if(rs.next()){
+				return new Utilisateur(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8),rs.getString(9),rs.getString(10),rs.getInt(11), rs.getBoolean(12) );
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return null;
+	}
 }

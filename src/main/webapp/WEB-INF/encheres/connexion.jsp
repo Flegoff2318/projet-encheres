@@ -38,7 +38,7 @@ String message = (String) request.getAttribute("message");
 		<div class="col d-flex justify-content-center">
 		<!-- Checkbox -->
 		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="souvenir" id="souvenir" />
+			<input class="form-check-input" type="checkbox" value="souvenir" name="souvenir" id="souvenir" />
 			<label class="form-check-label" for="souvenir">Se souvenir de moi </label>
 		</div>
 			<div class="col">

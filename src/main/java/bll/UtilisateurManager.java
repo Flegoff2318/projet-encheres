@@ -2,6 +2,7 @@ package bll;
 
 import java.util.List;
 
+import bo.Token;
 import bo.Utilisateur;
 import dal.DAOFactory;
 
@@ -37,5 +38,9 @@ public class UtilisateurManager {
 	
 	public Utilisateur selectionnerUtilisateurParId(int id) {
 		return DAOFactory.getUtilisateurDAO().selectById(id);
+	}
+
+	public Utilisateur selectionnerParToken(Token token){
+		return  DAOFactory.getUtilisateurDAO().selectByToken(token);
 	}
 }

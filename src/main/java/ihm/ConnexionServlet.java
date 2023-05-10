@@ -2,10 +2,7 @@ package ihm;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
@@ -32,10 +29,10 @@ public class ConnexionServlet extends HttpServlet {
 			
 			//Creation session
 			HttpSession session = request.getSession();
-			session.setAttribute("utilisateur",utilisateur);
+			session.setAttribute("utilisateur", utilisateur);
 			response.sendRedirect(request.getContextPath());
 
-			
+
 		} catch (BLLException e) {
 			
 			e.printStackTrace();
