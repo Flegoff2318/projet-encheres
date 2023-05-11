@@ -17,7 +17,7 @@
                     <c:otherwise>
                         <a href="" class="ml-2">Enchères</a>
                         <a href="<%=request.getContextPath()%>/nouvelle-vente" class="ml-2">Vendre un article</a>
-                        <a href="<%=request.getContextPath()%>/profil/${utilisateur.noUtilisateur}" class="ml-2">Mon profil</a>
+                        <a href="<%=request.getContextPath()%>/profil/${sessionScope.utilisateur.noUtilisateur}" class="ml-2">Mon profil</a>
                         <a href="<%=request.getContextPath()%>/deconnexion" class="ml-2">Déconnexion</a>
                     </c:otherwise>
                 </c:choose>

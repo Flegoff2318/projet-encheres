@@ -26,7 +26,7 @@ public class EnchereManager {
 
 	/**
 	 * supprime les enchères sur les articles de l'utilisateur concerné
-	 * @param id
+	 * @param noUtilisateur
 	 */
 	public void supprimerEnchereParArticle(int noUtilisateur) {
 		DAOFactory.getEnchereDAO().delete(noUtilisateur);
