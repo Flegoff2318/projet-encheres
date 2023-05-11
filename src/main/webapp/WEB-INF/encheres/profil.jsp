@@ -10,7 +10,9 @@
 					<p>Pseudo :</p>
 				</div>
 				<div class="col col-lg-2">
-					<p><strong>${utilisateur.pseudo}</strong></p>
+					<p>
+						<strong>${utilisateur.pseudo}</strong>
+					</p>
 				</div>
 			</div>
 			<div class="row justify-content-md-center">
@@ -69,14 +71,21 @@
 					<p>${utilisateur.ville}</p>
 				</div>
 			</div>
-			
-			<c:if test="${sessionScope.utilisateur.noUtilisateur==requestScope.utilisateur.noUtilisateur}">
+
 			<div class="row justify-content-md-center mt-5">
+				<c:if
+					test="${sessionScope.utilisateur.noUtilisateur==requestScope.utilisateur.noUtilisateur}">
+					<div class="col col-lg-2">
+						<a class="btn btn-primary"
+							href="<%=request.getContextPath()%>/profil/modifier/${sessionScope.utilisateur.noUtilisateur}">Modifier</a>
+
+					</div>
+				</c:if>
 				<div class="col col-lg-2">
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/profil/modifier/">Modifier</a>
+				<a href="<%=request.getContextPath()%>"><button type="button"
+						class="btn btn-danger">Annuler</button></a>
 				</div>
 			</div>
-			</c:if>
 		</div>
 	</main>
 	<%@include file="fragments/footer.jsp"%>

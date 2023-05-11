@@ -14,17 +14,15 @@ import java.util.List;
 import bll.ArticleVenduManager;
 import bll.CategorieManager;
 import bll.EnchereManager;
-import bll.UtilisateurManager;
 
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
-    @Override
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	 HttpSession session = request.getSession();
-         Utilisateur utilisateur = UtilisateurManager.getInstance().selectionnerUtilisateurParId(6);
-         session.setAttribute("utilisateur",utilisateur);
-        
+
     	List<ArticleVendu> articles = ArticleVenduManager.getInstance().getAllArticleVendus();
     	List<Categorie> categories = CategorieManager.getInstance().selectionnerCategories();
     	request.setAttribute("categories", categories);
@@ -54,6 +52,7 @@ public class AccueilServlet extends HttpServlet {
     	boolean ventesEnCours = request.getParameter("ventes-en-cours")!=null?true:false;
     	boolean ventesNonDebutees = request.getParameter("ventes-non-debutees")!=null?true:false;
     	boolean ventesTerminees = request.getParameter("ventes-terminees")!=null?true:false;
+    	String type = request.getParameter("type");
     	
     	request.setAttribute("encheresOuvertes", encheresOuvertes);
     	request.setAttribute("encheresEnCours", encheresEnCours);
@@ -63,6 +62,7 @@ public class AccueilServlet extends HttpServlet {
     	request.setAttribute("ventesTerminees", ventesTerminees);
     	request.setAttribute("categorieChoisie", categorie);
     	request.setAttribute("rechercheChoisie", recherche);
+    	request.setAttribute("type", type);
     	
     	if(encheresOuvertes || request.getSession().getAttribute("utilisateur")==null) {
     		List<ArticleVendu> articles = ArticleVenduManager.choixListe(categorie, recherche);

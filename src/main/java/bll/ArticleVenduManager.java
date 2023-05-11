@@ -38,6 +38,10 @@ public class ArticleVenduManager {
 		checkArticle(articleVendu);
 		DAOFactory.getArticleVenduDao().insert(articleVendu);
 	}
+	public void modifierArticle(ArticleVendu articleVendu) throws BLLException {
+		checkArticle(articleVendu);
+		DAOFactory.getArticleVenduDao().update(articleVendu);
+	}
 	
 	public void checkArticle(ArticleVendu articleVendu ) throws BLLException {
 		BLLException bll = new BLLException();
@@ -68,6 +72,10 @@ public class ArticleVenduManager {
 			return DAOFactory.getArticleVenduDao().selectSearch(categorie, recherche);
 		}
 	}
+
+	public void supprimerArticlesUtilisateur(int noUtilisateur) {
+		DAOFactory.getArticleVenduDao().deleteArticlesUtilisateur(noUtilisateur);
+	}
 	
 	public List<ArticleVendu> choixListe(int categorie, String recherche, int noUtilisateur){
 		if(categorie==0) {
@@ -76,5 +84,6 @@ public class ArticleVenduManager {
 		else {
 			return DAOFactory.getArticleVenduDao().selectSearchUser(categorie, recherche, noUtilisateur);
 		}
+
 	}
 }

@@ -2,13 +2,10 @@ package dal.jdbc;
 
 import bo.Enchere;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +21,11 @@ public class EnchereDAOImpl implements EnchereDAO{
 			+ "(no_utilisateur, no_article, date_enchere, montant_enchere) "
 			+ "VALUES (?,?,?,?);";
 	//inutilisé
-	private final String DELETE = "DELETE FROM encheres "
-			+ "WHERE no_article = ?";
+	private final String DELETE_AVEC_UTILISATEUR = "DELETE FROM encheres "
+			+ " WHERE no_utilisateur = ?";
+	private final String DELETE_AVEC_ARTICLE = "DELETE FROM encheres " +
+			" WHERE no_article " +
+			" IN (select no_article from ARTICLES_VENDUS where ARTICLES_VENDUS.no_utilisateur = ?);";
 	private final String UPDATE = "UPDATE encheres "
 			+ "SET date_enchere = ?, montant_enchere = ? "
 			+ "WHERE no_utilisateur = ? AND no_article = ?;";
@@ -52,6 +52,31 @@ public class EnchereDAOImpl implements EnchereDAO{
 			+ "JOIN CATEGORIES c ON a.no_categorie = c.no_categorie "
 			+ "JOIN ENCHERES e ON e.no_article = a.no_article "
 			+ "JOIN UTILISATEURS u2 on u2.no_utilisateur = e.no_utilisateur ";
+	
+	private static final String SELECT_TOP_ENCHERE = "SELECT TOP 1 "
+			//article
+			+ "a.no_article, nom_article, description, date_debut_encheres, "
+			+ "date_fin_encheres, prix_initial, prix_vente, a.no_utilisateur, "
+			+ "a.no_categorie, etat_vente, "
+			//utilisateur1
+			+ "u.pseudo, u.nom, u.prenom, u.email, u.telephone, u.rue, u.code_postal, "
+			+ "u.ville, u.mot_de_passe, u.credit, u.administrateur, "
+			//utilisateur2
+			+ "u2.no_utilisateur as 'no_utilisateur2', u2.pseudo as 'pseudo2', "
+			+ "u2.nom as 'nom2', u2.prenom as 'prenom2', u2.email as 'email2', "
+			+ "u2.telephone as 'telephone2', u2.rue as 'rue2', "
+			+ "u2.code_postal as 'code_postal2', u2.ville as 'ville2', "
+			+ "u2.mot_de_passe as 'mot_de_passe2', u2.credit as 'credit2', "
+			+ "u2.administrateur as 'administrateur2', "
+			//categorie & encheres
+			+ "libelle, e.date_enchere, e.montant_enchere "
+			+ "FROM ARTICLES_VENDUS a "
+			+ "JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur "
+			+ "JOIN CATEGORIES c ON a.no_categorie = c.no_categorie "
+			+ "JOIN ENCHERES e ON e.no_article = a.no_article "
+			+ "JOIN UTILISATEURS u2 on u2.no_utilisateur = e.no_utilisateur "
+			+ "WHERE a.no_article = ? "
+			+ "ORDER BY montant_enchere DESC;";
 	
 	private final static String SELECT_BY_UTILISATEUR = SELECT_ALL
 			+ "WHERE e.no_utilisateur = ?;";
@@ -82,7 +107,7 @@ public class EnchereDAOImpl implements EnchereDAO{
 			pstmt.setInt(4, enchere.getMontant_enchere());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			update(enchere);
 		}
 		
 	}
@@ -105,7 +130,13 @@ public class EnchereDAOImpl implements EnchereDAO{
 
 	@Override
 	public void delete(int id) {
-		
+		try (Connection connection = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(DELETE_AVEC_ARTICLE);
+			pstmt.setInt(1,id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	@Override
@@ -145,6 +176,66 @@ public class EnchereDAOImpl implements EnchereDAO{
 			ResultSet rs = pstmt.executeQuery();			
 			return recupEncheres(rs);
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Enchere selectTopEnchere(int noArticle){
+		try (Connection connection = ConnectionProvider.getConnection()){
+			
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_TOP_ENCHERE);
+			pstmt.setInt(1, noArticle);
+			ResultSet rs = pstmt.executeQuery();			
+			if(rs.next()) {
+				Categorie categorie = new Categorie(
+						rs.getInt("no_categorie"), 
+						rs.getString("libelle"));
+				Utilisateur vendeur = new Utilisateur(
+						rs.getInt("no_utilisateur"), 
+						rs.getString("pseudo"), 
+						rs.getString("nom"), 
+						rs.getString("prenom"), 
+						rs.getString("email"), 
+						rs.getString("telephone"), 
+						rs.getString("rue"), 
+						rs.getString("code_postal"), 
+						rs.getString("ville"), 
+						rs.getString("mot_de_passe"),
+						rs.getInt("credit"),
+						rs.getBoolean("administrateur"));
+				Utilisateur acheteur = new Utilisateur(
+						rs.getInt("no_utilisateur2"), 
+						rs.getString("pseudo2"), 
+						rs.getString("nom2"), 
+						rs.getString("prenom2"), 
+						rs.getString("email2"), 
+						rs.getString("telephone2"), 
+						rs.getString("rue2"), 
+						rs.getString("code_postal2"), 
+						rs.getString("ville2"), 
+						rs.getString("mot_de_passe2"),
+						rs.getInt("credit2"),
+						rs.getBoolean("administrateur2"));
+				ArticleVendu article = new ArticleVendu(
+						rs.getInt("no_article"),
+						rs.getString("nom_article"),
+						rs.getString("description"), 
+						rs.getDate("date_debut_encheres").toLocalDate(), 
+						rs.getDate("date_fin_encheres").toLocalDate(), 
+						rs.getInt("prix_initial"), 
+						rs.getInt("prix_vente"), 
+						rs.getInt("etat_vente"), 
+						vendeur, 
+						categorie);
+				Enchere enchere = new Enchere(
+						rs.getTimestamp("date_enchere").toLocalDateTime(),
+						rs.getInt("montant_enchere"),
+						acheteur,
+						article);
+				return enchere;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -205,6 +296,18 @@ public class EnchereDAOImpl implements EnchereDAO{
 		}
 
 		return null;
+	}
+
+
+	@Override
+	public void supprimerAvecUtilisateur(int noUtilisateur) {
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = connection.prepareStatement(DELETE_AVEC_UTILISATEUR);
+			pstmt.setInt(1, noUtilisateur);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private List<Enchere> recupEncheres(ResultSet rs) throws SQLException{
