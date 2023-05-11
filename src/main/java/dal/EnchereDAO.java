@@ -11,5 +11,6 @@ public interface EnchereDAO extends DAO<Enchere>{
 	List<Enchere> selectByArticle(int noArticle);
 	List<Enchere> selectSearch(int noCategorie, String recherche, int noUtilisateur);
 	List<Enchere> selectKeyword(String recherche, int noUtilisateur);
+	Enchere selectTopEnchere(int noArticle);
 
 }

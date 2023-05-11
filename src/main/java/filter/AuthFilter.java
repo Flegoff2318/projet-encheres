@@ -24,7 +24,6 @@ import bo.Utilisateur;
 				urlPatterns =  {
 						"/deconnexion",
 						"/profil/*",
-						"/encherir/*",
 						"/nouvelle-vente"
 				}				
 		)

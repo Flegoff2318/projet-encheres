@@ -19,7 +19,7 @@ String message = (String) request.getAttribute("message");
 			</div>
 		</c:if>
 	<div class="container justify-content-md-center">
-		<form method="post">
+		<form action="<%= request.getContextPath() %>/connexion" method="post">
 		
 <!-- 		<div class="row mb-4"> -->
 <!-- 			<input type="email" name="email" id="email" class="form-control" /> -->

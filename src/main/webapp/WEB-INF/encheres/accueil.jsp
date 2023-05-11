@@ -19,20 +19,22 @@
 						<c:if
 							test="${enchere.articleVendu.etatVente==1 && encheresEnCours}">
 							<!--  if >2 alors on passe a la ligne -->
-							<div class="col-6">
+							<div class="col-4">
 								<div>
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-info">
-									<p>
-										<a href="#">${enchere.articleVendu.nomArticle}</a>
+								<div class="p-3 mb-5" style="width: 300px; background-color : rgb(102, 102, 153)">
+									<p>En cours :
+										<a class="text-light font-weight-bold"
+											href="<%= request.getContextPath() %>/encherir/${enchere.articleVendu.noArticle}">${enchere.articleVendu.nomArticle}</a>
 									</p>
-									<p>Prix : ${enchere.articleVendu.prixVente}</p>
+									<p>Prix :
+										${enchere.articleVendu.prixVente>0?enchere.articleVendu.prixVente:enchere.articleVendu.miseAPrix}</p>
 									<p>Fin de l'enchère :
 										${enchere.articleVendu.dateFinEncheres}</p>
 									<p>
-										Vendeur : <a
+										Vendeur : <a class="text-light font-weight-bold"
 											href="<%= request.getContextPath() %>/profil/${enchere.articleVendu.utilisateur.noUtilisateur}">${enchere.articleVendu.utilisateur.pseudo}</a>
 									</p>
 								</div>
@@ -42,22 +44,25 @@
 					<!-- 3eme bouton de gauche appuyé -->
 					<c:forEach var="enchere" items="${encheresUtilisateur}">
 						<c:if
-							test="${enchere.articleVendu.etatVente==2 && encheresRemportees}">
+							test="${enchere.articleVendu.etatVente==2 && encheresRemportees
+							&& enchere.montant_enchere == enchere.articleVendu.prixVente}">
 							<!--  if >2 alors on passe a la ligne -->
-							<div class="col-6">
+							<div class="col-4">
 								<div>
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-danger">
-									<p>
-										<a href="#">${enchere.articleVendu.nomArticle}</a>
+								<div class="p-3 mb-5" style="width: 300px; background-color : rgb(38, 115, 77)">
+									<p>Remporté :
+										<a class="text-light font-weight-bold"
+											href="<%= request.getContextPath() %>/encherir/${enchere.articleVendu.noArticle}">${enchere.articleVendu.nomArticle}</a>
 									</p>
-									<p>Prix : ${enchere.articleVendu.prixVente}</p>
+									<p>Prix :
+										${enchere.articleVendu.prixVente>0?enchere.articleVendu.prixVente:enchere.articleVendu.miseAPrix}</p>
 									<p>Fin de l'enchère :
 										${enchere.articleVendu.dateFinEncheres}</p>
 									<p>
-										Vendeur : <a
+										Vendeur : <a class="text-light font-weight-bold"
 											href="<%= request.getContextPath() %>/profil/${enchere.articleVendu.utilisateur.noUtilisateur}">${enchere.articleVendu.utilisateur.pseudo}</a>
 									</p>
 								</div>
@@ -66,50 +71,56 @@
 					</c:forEach>
 					<!-- 1er bouton de gauche appuyé -->
 					<c:forEach var="article" items="${articles}">
-						<!--  if >2 alors on passe a la ligne -->
-						<div class="col-6">
-							<div>
-								<img alt="placeholder"
-									src="https://placehold.co/300x300/green/white">
-							</div>
-							<div class="p-3">
-								<p>
-									<a href="#">${article.nomArticle}</a>
-								</p>
-								<p>Prix : ${article.prixVente}</p>
-								<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-								<p>
-									Vendeur :
-									<c:choose>
-										<c:when test="${sessionScope.utilisateur != null}">
-											<a
-												href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
-										</c:when>
-										<c:otherwise>
+						<c:if test="${article.etatVente==1}">
+							<!--  if >2 alors on passe a la ligne -->
+							<div class="col-4">
+								<div>
+									<img alt="placeholder"
+										src="https://placehold.co/300x300/green/white">
+								</div>
+								<div class="p-3 bg-dark mb-5" style="width: 300px;">
+									<p>
+										<a class="font-weight-bold"
+											href="<%= request.getContextPath() %>/encherir/${article.noArticle}">${article.nomArticle}</a>
+									</p>
+									<p>Prix :
+										${article.prixVente>0?article.prixVente:article.miseAPrix}</p>
+									<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
+									<p>
+										Vendeur :
+										<c:choose>
+											<c:when test="${sessionScope.utilisateur != null}">
+												<a class="font-weight-bold"
+													href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
+											</c:when>
+											<c:otherwise>
 										${article.utilisateur.pseudo}
 									</c:otherwise>
-									</c:choose>
-								</p>
+										</c:choose>
+									</p>
+								</div>
 							</div>
-						</div>
+						</c:if>
 					</c:forEach>
 					<!-- 1er bouton de droite appuyé -->
 					<c:forEach var="article" items="${ventesUtilisateur}">
 						<c:if test="${article.etatVente==1 && ventesEnCours}">
 							<!--  if >2 alors on passe a la ligne -->
-							<div class="col-6">
+							<div class="col-4">
 								<div>
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-light">
-									<p>
-										<a href="#">${article.nomArticle}</a>
+								<div class="p-3 mb-5" style="width: 300px; background-color : rgb(102, 102, 153)">
+									<p>Vente en cours :
+										<a class="text-light font-weight-bold"
+											href="<%= request.getContextPath() %>/encherir/${article.noArticle}">${article.nomArticle}</a>
 									</p>
-									<p>Prix : ${article.prixVente}</p>
+									<p>Prix :
+										${article.prixVente>0?article.prixVente:article.miseAPrix}</p>
 									<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
 									<p>
-										Vendeur : <a
+										Vendeur : <a class="text-light font-weight-bold"
 											href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
 									</p>
 								</div>
@@ -120,16 +131,18 @@
 					<c:forEach var="article" items="${ventesUtilisateur}">
 						<c:if test="${article.etatVente==0 && ventesNonDebutees}">
 							<!--  if >2 alors on passe a la ligne -->
-							<div class="col-6">
+							<div class="col-4">
 								<div>
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-dark">
-									<p>
-										<a href="#">${article.nomArticle}</a>
+								<div class="p-3 bg-secondary mb-5" style="width: 300px;">
+									<p>Non débuté : 
+										<a
+											href="<%= request.getContextPath() %>/encherir/${article.noArticle}">${article.nomArticle}</a>
 									</p>
-									<p>Prix : ${article.prixVente}</p>
+									<p>Prix :
+										${article.prixVente>0?article.prixVente:article.miseAPrix}</p>
 									<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
 									<p>
 										Vendeur : <a
@@ -143,19 +156,21 @@
 					<c:forEach var="article" items="${ventesUtilisateur}">
 						<c:if test="${article.etatVente==2 && ventesTerminees}">
 							<!--  if >2 alors on passe a la ligne -->
-							<div class="col-6">
+							<div class="col-4">
 								<div>
 									<img alt="placeholder"
 										src="https://placehold.co/300x300/green/white">
 								</div>
-								<div class="p-3 bg-primary">
-									<p>
-										<a href="#">${article.nomArticle}</a>
+								<div class="p-3 mb-5" style="width: 300px; background-color : rgb(38, 115, 77)">
+									<p>Vente terminée : 
+										<a class="text-light font-weight-bold"
+											href="<%= request.getContextPath() %>/encherir/${article.noArticle}">${article.nomArticle}</a>
 									</p>
-									<p>Prix : ${article.prixVente}</p>
+									<p>Prix :
+										${article.prixVente>0?article.prixVente:article.miseAPrix}</p>
 									<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
 									<p>
-										Vendeur : <a
+										Vendeur : <a class="text-light font-weight-bold"
 											href="<%= request.getContextPath() %>/profil/${article.utilisateur.noUtilisateur}">${article.utilisateur.pseudo}</a>
 									</p>
 								</div>
@@ -198,68 +213,66 @@
 
 
 								<div class="row gy-2">
-									<div class="col-6">
-										<input type="radio" class="btn-check" name="type" id="achat"
-											autocomplete="off" checked> <label
-											class="btn btn-outline-primary" for="achat">Achats</label>
+									<div class="col-6 auctions">
+										<input type="radio" class="btn-check" name="type"
+											${type!="sales"?"checked":""} id="auctions"
+											onchange="change(event);" value="auctions"> <label
+											class="btn btn-outline-primary" for="auctions">Achats</label>
 
-									</div>
-									<div class="col-6">
-										<input type="radio" class="btn-check" name="type" id="vente"
-											autocomplete="off"> <label
-											class="btn btn-outline-primary" for="vente">Mes
-											ventes</label>
-									</div>
-								</div>
-
-								<div class="row gy-2">
-									<div class="col-6">
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="check"
 												${encheresOuvertes?"checked":""} name="encheres-ouvertes"
-												id="encheres-ouvertes"> <label
+												${type=="sales"?"disabled":""} id="encheres-ouvertes"> <label
 												class="form-check-label" for="encheres-ouvertes">
 												enchères ouvertes </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="check"
 												${encheresEnCours?"checked":""} name="encheres-en-cours"
-												id="encheres-en-cours"> <label
+												${type=="sales"?"disabled":""} id="encheres-en-cours"> <label
 												class="form-check-label" for="encheres-en-cours">
 												mes enchères en cours </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="check"
-												${encheresRemportees?"checked":""}
-												name="encheres-remportees" id="encheres-remportees">
+												${encheresRemportees?"checked":""} name="encheres-remportees" 
+												${type=="sales"?"disabled":""} id="encheres-remportees">
 											<label class="form-check-label" for="encheres-remportees">
 												mes enchères remportées </label>
 										</div>
+
 									</div>
-									<div class="col-6">
+									<div class="col-6 sales">
+										<input type="radio" class="btn-check" name="type"
+											${type=="sales"?"checked":""} id="sales" onchange="change(event);"
+											value="sales"> <label class="btn btn-outline-primary"
+											for="sales">Mes ventes</label>
+
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="check"
 												${ventesEnCours?"checked":""} name="ventes-en-cours"
-												id="ventes-en-cours"> <label
+												${type!="sales"?"disabled":""} id="ventes-en-cours"> <label
 												class="form-check-label" for="ventes-en-cours"> mes
 												ventes en cours </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="check"
 												${ventesNonDebutees?"checked":""} name="ventes-non-debutees"
-												id="ventes-non-debutees"> <label
+												${type!="sales"?"disabled":""} id="ventes-non-debutees"> <label
 												class="form-check-label" for="ventes-non-debutees">
 												ventes non débutées </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="check"
 												${ventesTerminees?"checked":""} name="ventes-terminees"
-												id="ventes-terminees"> <label
+												${type!="sales"?"disabled":""} id="ventes-terminees"> <label
 												class="form-check-label" for="ventes-terminees">
 												ventes terminées </label>
 										</div>
+
 									</div>
 								</div>
+
 							</c:if>
 						</fieldset>
 					</form>
@@ -269,5 +282,31 @@
 	</main>
 
 	<%@include file="fragments/footer.jsp"%>
+	<script>
+    function change(e){
+        if(e.target.value==="sales"){ 
+            disable(".auctions input[type=checkbox]");
+        }else{
+            disable(".sales input[type=checkbox]");
+        }
+        var parent = e.target.parentNode;
+        enable(parent);
+    }
+    
+    function disable(selector){
+        var listeChecks = document.querySelectorAll(selector);
+            listeChecks.forEach((value,index,array)=>{
+                value.disabled= true;
+                value.checked= false;
+        });     
+    }
+    
+    function enable(node){
+        var listeChecks = node.querySelectorAll("input[type=checkbox]");
+        listeChecks.forEach((value,index,array)=>{
+            value.disabled= false;          
+        }); 
+    }
+</script>
 </body>
 </html>

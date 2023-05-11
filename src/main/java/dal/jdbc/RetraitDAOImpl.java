@@ -16,27 +16,27 @@ public class RetraitDAOImpl implements RetraitDAO {
 	private final String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?,?,?,?);";
 	private final String DELETE_RETRAITS_UTILISATEUR = "DELETE FROM RETRAITS " +
 			"WHERE EXISTS (" +
-			"              SELECT 1" +
-			"              FROM ARTICLES_VENDUS" +
-			"              WHERE no_utilisateur = ?" +
-			"                AND no_article = RETRAITS.no_article" +
+			"              SELECT 1 " +
+			"              FROM ARTICLES_VENDUS " +
+			"              WHERE no_utilisateur = ? " +
+			"                AND no_article = RETRAITS.no_article " +
 			"          );";
-	private final String SELECT_ALL = "SELECT R.rue,R.code_postal,R.ville," +
-			"U.no_utilisateur,U.pseudo,nom,prenom,email,telephone,U.rue,U.code_postal,U.ville,mot_de_passe,credit,administrateur," +
-			"C.no_categorie,C.libelle,\n" +
-			"AV.no_article,AV.nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente" +
-			"FROM RETRAITS R" +
+	private final String SELECT_ALL = "SELECT R.rue,R.code_postal,R.ville, " +
+			"U.no_utilisateur,U.pseudo,nom,prenom,email,telephone,U.rue,U.code_postal,U.ville,mot_de_passe,credit,administrateur, " +
+			"C.no_categorie,C.libelle, " +
+			"AV.no_article,AV.nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente " +
+			"FROM RETRAITS R " +
 			"JOIN ARTICLES_VENDUS AV on AV.no_article = R.no_article " +
 			"JOIN UTILISATEURS U on U.no_utilisateur = AV.no_utilisateur " +
 			"JOIN CATEGORIES C on C.no_categorie = AV.no_categorie;";
 	private final String SELECT_BY_ID = "SELECT R.rue,R.code_postal,R.ville," +
 			"U.no_utilisateur,U.pseudo,nom,prenom,email,telephone,U.rue,U.code_postal,U.ville,mot_de_passe,credit,administrateur," +
 			"C.no_categorie,C.libelle," +
-			"AV.no_article,AV.nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente" +
-			"FROM RETRAITS R" +
+			"AV.no_article,AV.nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente " +
+			"FROM RETRAITS R " +
 			"JOIN ARTICLES_VENDUS AV on AV.no_article = R.no_article " +
 			"JOIN UTILISATEURS U on U.no_utilisateur = AV.no_utilisateur " +
-			"JOIN CATEGORIES C on C.no_categorie = AV.no_categorie" +
+			"JOIN CATEGORIES C on C.no_categorie = AV.no_categorie " +
 			"WHERE AV.no_article=?;";
 	private final String DELETE = "DELETE FROM RETRAITS WHERE no_article=?;";
 	private final String UPDATE = "UPDATE RETRAITS SET rue=?,code_postal=?,ville=? WHERE no_article=?;";
