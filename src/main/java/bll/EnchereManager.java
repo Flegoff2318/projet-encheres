@@ -2,7 +2,6 @@ package bll;
 
 import java.util.List;
 
-import bo.ArticleVendu;
 import bo.Enchere;
 import dal.DAOFactory;
 
@@ -20,7 +19,7 @@ public class EnchereManager {
 		return instance;
 	}
 	
-	public void ajouterEnchere(Enchere enchere) {
+	public void ajouterEnchere(Enchere enchere) {			
 		DAOFactory.getEnchereDAO().insert(enchere);
 	}
 
@@ -50,6 +49,9 @@ public class EnchereManager {
 	
 	public List<Enchere> selectionnerEncheresArticle(int noArticle) {
 		return DAOFactory.getEnchereDAO().selectByArticle(noArticle);
+	}
+	public Enchere selectionnerMeilleureEnchere(int noArticle) {
+		return DAOFactory.getEnchereDAO().selectTopEnchere(noArticle);
 	}
 	
 	public List<Enchere> selectionnerEncheresUtilisateur(int noUtilisateur) {

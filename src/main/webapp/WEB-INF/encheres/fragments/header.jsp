@@ -12,13 +12,13 @@
             <div class="ml-auto">
                 <c:choose>
                     <c:when test="${utilisateur==null}">
-                        <a href="<%=request.getContextPath()%>/connexion" class="ml-2">S'inscrire - Se connecter</a>
+                        <a href="<%=request.getContextPath()%>/connexion" class="ml-2 text-white">S'inscrire - Se connecter</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="" class="ml-2">Enchères</a>
-                        <a href="<%=request.getContextPath()%>/nouvelle-vente" class="ml-2">Vendre un article</a>
-                        <a href="<%=request.getContextPath()%>/profil/${sessionScope.utilisateur.noUtilisateur}" class="ml-2">Mon profil</a>
-                        <a href="<%=request.getContextPath()%>/deconnexion" class="ml-2">Déconnexion</a>
+                        <a href="<%=request.getContextPath()%>" class="ml-2 text-white">Enchères</a>
+                        <a href="<%=request.getContextPath()%>/nouvelle-vente" class="ml-2 text-white">Vendre un article</a>
+                        <a href="<%=request.getContextPath()%>/profil/${sessionScope.utilisateur.noUtilisateur}" class="ml-2 text-white">Mon profil</a>
+                        <a href="<%=request.getContextPath()%>/deconnexion" class="ml-2 text-white">Déconnexion</a>
                     </c:otherwise>
                 </c:choose>
             </div>

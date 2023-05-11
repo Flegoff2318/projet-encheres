@@ -38,6 +38,10 @@ public class ArticleVenduManager {
 		checkArticle(articleVendu);
 		DAOFactory.getArticleVenduDao().insert(articleVendu);
 	}
+	public void modifierArticle(ArticleVendu articleVendu) throws BLLException {
+		checkArticle(articleVendu);
+		DAOFactory.getArticleVenduDao().update(articleVendu);
+	}
 	
 	public void checkArticle(ArticleVendu articleVendu ) throws BLLException {
 		BLLException bll = new BLLException();

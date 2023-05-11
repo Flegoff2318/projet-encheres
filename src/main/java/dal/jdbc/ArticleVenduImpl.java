@@ -32,17 +32,17 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 	
 	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?;";
 	private static final String DELETE_ARTICLES_UTILISATEUR = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ?;";
-	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS  SET ("
-			+ "nom_article = ?,"
-			+ "description = ?,"
-			+ "date_debut_encheres = ?,"
-			+ "date_fin_encheres = ?,"
-			+ "prix_initial = ?,"
-			+ "prix_vente = ?,"
-			+ "etat_vente = ?,"
-			+ "no_utilisateur = ?,"
-			+ "no_categorie = ?"			
-			+")  WHERE no_article = ?";
+	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET "
+			+ "nom_article = ?, "
+			+ "description = ?, "
+			+ "date_debut_encheres = ?, "
+			+ "date_fin_encheres = ?, "
+			+ "prix_initial = ?, "
+			+ "prix_vente = ?, "
+			+ "etat_vente = ?, "
+			+ "no_utilisateur = ?, "
+			+ "no_categorie = ? "			
+			+ "WHERE no_article = ?";
 
 	private static final String SELECT_ALL_ARTICLE = 
 			"SELECT no_article, nom_article, description, "
@@ -88,8 +88,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 										);
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());			
-			pStmt.setDate(3,Date.valueOf(LocalDate.now()));
-			pStmt.setDate(4,Date.valueOf(LocalDate.now()));
+			pStmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()));
+			pStmt.setDate(4,Date.valueOf(articleVendu.getDateFinEncheres()));
 			pStmt.setInt(5, articleVendu.getMiseAPrix());
 			pStmt.setInt(6, articleVendu.getPrixVente());
 			pStmt.setInt(7, articleVendu.getEtatVente());
@@ -125,13 +125,14 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			PreparedStatement  pStmt = connection.prepareStatement(UPDATE_ARTICLE);
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());			
-			pStmt.setDate(3,Date.valueOf(LocalDate.now()));
-			pStmt.setDate(4,Date.valueOf(LocalDate.now()));
+			pStmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()));
+			pStmt.setDate(4,Date.valueOf(articleVendu.getDateFinEncheres()));
 			pStmt.setInt(5, articleVendu.getMiseAPrix());
 			pStmt.setInt(6, articleVendu.getPrixVente());
 			pStmt.setInt(7, articleVendu.getEtatVente());
 			pStmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
 			pStmt.setInt(9, articleVendu.getCategorie().getNoCategorie());	
+			pStmt.setInt(10, articleVendu.getNoArticle());	
 			pStmt.executeUpdate();					
 			
 		}catch (SQLException e) {
@@ -161,24 +162,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			PreparedStatement  pStmt = connection.prepareStatement(SELECT_ONE_ARTICLE);
 			pStmt.setInt(1, id);
 			ResultSet rs = pStmt.executeQuery();
-			if(rs.next()) {
-				
-				Utilisateur u = new Utilisateur();
-				u.setNoUtilisateur(rs.getInt("no_utilisateur"));
-				Categorie cat = new Categorie();
-				cat.setNoCategorie(rs.getInt("no_categorie"));
-				
-				return new ArticleVendu(rs.getInt("no_article"),
-						rs.getString("nom_article"),
-						rs.getString("description"),
-						rs.getDate("date_debut_encheres").toLocalDate(),						
-						rs.getDate("date_fin_encheres").toLocalDate(),
-						rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"),
-						rs.getInt("etat_vente"),
-						u,
-						cat );			
-			}		
+			return recupListeArticle(rs).get(0);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}		
