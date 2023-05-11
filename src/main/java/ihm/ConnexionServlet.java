@@ -29,7 +29,7 @@ public class ConnexionServlet extends HttpServlet {
 			
 			String motdepasse = request.getParameter("motdepasse");
 			Utilisateur utilisateur = SecurityService.getInstance().login(login,motdepasse);
-			
+		
 			//Creation session
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur",utilisateur);
@@ -37,8 +37,10 @@ public class ConnexionServlet extends HttpServlet {
 
 			
 		} catch (BLLException e) {
-			
+			request.setAttribute("error", e.getMessages().toString());
 			e.printStackTrace();
+			request.getRequestDispatcher("/WEB-INF/encheres/connexion.jsp").forward(request, response);
+			
 		}
 
     }

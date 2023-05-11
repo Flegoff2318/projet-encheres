@@ -26,6 +26,8 @@ public class SecurityService {
 				);
 		DAOFactory.getUtilisateurDAO().insert(utilisateur);		
 	}
+	
+	
 
 	public Utilisateur login(String login, String motdepasse) throws BLLException {
 		
@@ -36,14 +38,20 @@ public class SecurityService {
 			throw new BLLException();
 		}
 		
-		if(!motdepasse.equals(utilisateur.getMotDePasse())) {			
-			throw new BLLException();
+		if(!motdepasse.equals(utilisateur.getMotDePasse())) {	
+//			System.out.println("erreur ici");
+//			throw new BLLException();
+			BCrypt.Result result = BCrypt.verifyer().verify(motdepasse.toCharArray(), utilisateur.getMotDePasse());
+			if (!result.verified) {
+				throw new BLLException("Vos identifiants sont incorrects");
+			}
 		}
 		
 //		BCrypt.Result result = BCrypt.verifyer().verify(motdepasse.toCharArray(), utilisateur.getMotDePasse());
 //		if (!result.verified) {
-//			throw new BLLException("Le mot de passe est erroné!");
+//			throw new BLLException("Vos identifiants sont incorrects");
 //		}
+		
 		//creation session
 		
 		return utilisateur;

@@ -11,10 +11,10 @@ import java.io.IOException;
 @WebServlet("/encherir/*")
 public class EncherirServlet extends HttpServlet {
  	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 //int idArticle = Integer.parseInt(request.getPathInfo().substring(1));
-		 //ArticleVendu articleVendu = ArticleVenduManager.getInstance().getArticleVendu(idArticle);
-		 //request.setAttribute("articleVendu",articleVendu);
-		request.setAttribute("enchereMin",120);
+		 int idArticle = Integer.parseInt(request.getPathInfo().substring(1));
+		 ArticleVendu articleVendu = ArticleVenduManager.getInstance().getArticleVendu(idArticle);
+		 request.setAttribute("articleVendu",articleVendu);
+		 request.setAttribute("enchereMin",120);
 		 request.getRequestDispatcher("/WEB-INF/encheres/encherir.jsp").forward(request,response);
 	}
 

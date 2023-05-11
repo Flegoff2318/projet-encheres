@@ -1,5 +1,6 @@
 package ihm;
 
+import bll.SecurityService;
 import bll.UtilisateurManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,8 +32,11 @@ public class CreerCompteServlet extends HttpServlet {
     		String motDePasse = request.getParameter("motdepasse");
 			String confirmation = request.getParameter("confirmation");
 			if(motDePasse.equals(confirmation)){
+				//BCrypt				
 				Utilisateur nouvelUtilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codepostal, ville, motDePasse,false);
-				UtilisateurManager.getInstance().ajouterUtilisateur(nouvelUtilisateur);
+//				UtilisateurManager.getInstance().ajouterUtilisateur(nouvelUtilisateur);
+				
+				SecurityService.getInstance().addUser(nouvelUtilisateur);
 				request.setAttribute("message","votre compte à bien été créé !");
 				request.getRequestDispatcher("/WEB-INF/encheres/connexion.jsp").forward(request,response);
 			}else{

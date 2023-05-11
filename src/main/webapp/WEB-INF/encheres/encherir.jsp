@@ -20,21 +20,20 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col" colspan="2">Nom de l'article</th>
+                        <th scope="col" colspan="2">${articleVendu.nomArticle}</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="table-active">
                         <th scope="row">Description</th>
                         <td>
-                            blablablablablablablablablablablablablablablablablablablabla
-                            blablablablablablablablablablablablablablablablablablablabla
-                            blablablablablablablablablablablablablablablablablablablabla
+                           ${articleVendu.description}
                         </td>
                     </tr>
                     <tr class="table-light">
                         <th scope="row">Catégorie</th>
-                        <td>Libellé de la catégorie</td>
+                        <td>${articleVendu.categorie}</td>
                     </tr>
                     <tr class="table-active">
                         <th scope="row">Meilleure offre</th>
@@ -42,15 +41,23 @@
                     </tr>
                     <tr class="table-light">
                         <th scope="row">Mise à prix</th>
-                        <td>Prix de départ de l'article</td>
+                        <td>${articleVendu.miseAPrix}</td>
                     </tr>
-                    <tr class="table-active">
-                        <th scope="row">Fin de l'enchère</th>
-                        <td>Date de fin de l'enchère</td>
+                       <tr class="table-active">
+                        <th scope="row">Début de l'enchère</th>
+                        <td>${articleVendu.dateDebutEncheres}</td>
                     </tr>
                     <tr class="table-light">
+                        <th scope="row">Fin de l'enchère</th>
+                        <td>${articleVendu.dateFinEncheres}</td>
+                    </tr>
+                    <tr class="table-active">
+                        <th scope="row">Vendeur</th>
+                        <td>${articleVendu.utilisateur}</td>
+                    </tr>
+                     <tr class="table-light">
                         <th scope="row">Retrait</th>
-                        <td>Adresse de retrait de l'article</td>
+                        <td>${articleVendu.utilisateur.rue}</td>
                     </tr>
                     </tbody>
                 </table>
