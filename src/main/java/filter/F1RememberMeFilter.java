@@ -19,12 +19,12 @@ import java.io.IOException;
 				DispatcherType.REQUEST
 		},
 		urlPatterns =  {
-				"/*",
-				"!/connexion"
+				"/*"
 		}
+		
 )
 
-public class RememberMeFilter extends HttpFilter implements Filter {
+public class F1RememberMeFilter extends HttpFilter implements Filter {
 
 
 

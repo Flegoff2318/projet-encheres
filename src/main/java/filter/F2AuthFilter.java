@@ -29,7 +29,7 @@ import bo.Utilisateur;
 				}				
 		)
 
-public class AuthFilter extends HttpFilter implements Filter {
+public class F2AuthFilter extends HttpFilter implements Filter {
 
 
 	
