@@ -71,7 +71,7 @@ String message = (String) request.getAttribute("message");
 								<!-- Checkbox -->
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox"
-										value="souvenir" id="souvenir" /> <label
+										value="souvenir" name="souvenir" id="souvenir" /> <label
 										class="form-check-label" for="souvenir">Se souvenir de moi </label>
 								</div>				
 								
@@ -82,7 +82,7 @@ String message = (String) request.getAttribute("message");
 					
 				</div>				
 				
-			</form>
+			
 			
 			<!-- 		btn creer compte			 -->						
 			<div class="col-6 offset-3">
@@ -92,7 +92,8 @@ String message = (String) request.getAttribute("message");
 							compte</button>
 					</div>
 				</div>
-			</div>	
+			</div>
+			</form>	
 		</div>
 	</main>
 	<%@include file="fragments/footer.jsp"%>

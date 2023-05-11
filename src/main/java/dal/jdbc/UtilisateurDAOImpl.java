@@ -16,7 +16,7 @@ import config.ConnectionProvider;
 import dal.UtilisateurDAO;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
-	private final String SELECT_USER_BY_TOKEN = "select no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur from UTILISATEURS u inner join TOKENS t on u.no_utilisateur=t.no_utilisateur where t.user_token=? and t.password_token=?;";
+	private final String SELECT_USER_BY_TOKEN = "select u.no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur from UTILISATEURS u inner join AUTH_TOKENS t on u.no_utilisateur=t.no_utilisateur where t.user_token=? and t.password_token=?;";
 
 	private final String INSERT = "INSERT INTO utilisateurs "
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, "

@@ -38,7 +38,7 @@ public class CreerCompteServlet extends HttpServlet {
 				
 				SecurityService.getInstance().addUser(nouvelUtilisateur);
 				request.setAttribute("message","votre compte à bien été créé !");
-				request.getRequestDispatcher("/WEB-INF/encheres/connexion.jsp").forward(request,response);
+				response.sendRedirect(request.getContextPath()+"/connexion");
 			}else{
 				request.setAttribute("erreur","le mot de passe ne correspond pas.");
 				request.getRequestDispatcher("/WEB-INF/encheres/creer-compte.jsp").forward(request,response);

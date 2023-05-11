@@ -8,8 +8,8 @@ import java.sql.*;
 import java.util.List;
 
 public class TokenDAOImpl implements TokenDAO {
-    private final String INSERT = "INSERT INTO TOKENS (no_utilisateur, user_token, password_token, date_expiration) VALUES (?,?,?,?);";
-    private final String DELETE = "DELETE FROM TOKENS WHERE no_utilisateur=?;";
+    private final String INSERT = "INSERT INTO AUTH_TOKENS (no_utilisateur, user_token, password_token, date_expiration) VALUES (?,?,?,?);";
+    private final String DELETE = "DELETE FROM AUTH_TOKENS WHERE no_utilisateur=?;";
     @Override
     public void insert(Token token) {
         try (Connection cnx = ConnectionProvider.getConnection()){

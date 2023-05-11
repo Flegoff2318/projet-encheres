@@ -24,7 +24,8 @@ import jakarta.servlet.http.HttpSession;
 				},
 				urlPatterns =  {
 						"/profil/*",
-						"/nouvelle-vente"
+						"/nouvelle-vente",
+						"/vente-terminee/*"
 				}				
 		)
 

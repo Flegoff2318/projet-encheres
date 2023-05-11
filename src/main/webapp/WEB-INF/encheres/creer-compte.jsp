@@ -7,7 +7,7 @@
 		<div class="container">
 			<div class="row text-center">
 				<div class="col mt-5 b-5">
-					<h3>Mon profil</h3>
+					<h3>Création de compte</h3>
 				</div>
 			</div>
 			<form action="" method="post">
