@@ -1,6 +1,4 @@
 <%@page import="bo.ArticleVendu"%>
-<%@page import="java.time.LocalDate"%>
-<%@page import="bll.ArticleVenduManager"%>
 <%@page import="java.sql.Date"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

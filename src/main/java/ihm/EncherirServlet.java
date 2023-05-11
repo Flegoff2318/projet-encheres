@@ -20,16 +20,12 @@ import java.util.List;
 public class EncherirServlet extends HttpServlet {
  	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 int idArticle = Integer.parseInt(request.getPathInfo().substring(1));
-		 
 		 ArticleVendu article = ArticleVenduManager.getInstance().getArticleVendu(idArticle);
 		 request.setAttribute("article",article);
-		 
 		 Enchere enchere = EnchereManager.getInstance().selectionnerMeilleureEnchere(idArticle);
 		 request.setAttribute("enchere", enchere!=null?enchere.getMontant_enchere():0);
-		 
 		 Retrait retrait = RetraitManager.getInstance().selectionnerRetraitParNoArticle(idArticle);
 		 request.setAttribute("retrait", retrait);
-		 
 		 request.getRequestDispatcher("/WEB-INF/encheres/encherir.jsp").forward(request,response);
 	}
 

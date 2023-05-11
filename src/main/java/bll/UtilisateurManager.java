@@ -20,10 +20,29 @@ public class UtilisateurManager {
 		return instance;
 	}
 	
-	public void ajouterUtilisateur(Utilisateur utilisateur) {
+	public void ajouterUtilisateur(Utilisateur utilisateur) throws BLLException {
+		BLLException be = new BLLException();
+		// tu créées une BLLException
+		verification(utilisateur,be);
+		//verification des champs (tu passes l'utilisateur et l'exception)
+		if(be.hasErrors()) {
+			throw be;
+		}
+		// si tu as des erreurs tu les fait remonter, sinon tu continues
+		
+		//bcrypt
 		DAOFactory.getUtilisateurDAO().insert(utilisateur);
 	}
 	
+	// ta fonction de verification des champs
+	// ton erreur BLL => a chaque erreur tu la rajoute dans la List de BLLException
+	// 
+	private void verification(Utilisateur utilisateur, BLLException be) {
+		
+		
+		DAOFactory.getUtilisateurDAO().insert(utilisateur);
+	}
+
 	public void supprimerUtilisateur(int id) {
 		DAOFactory.getUtilisateurDAO().delete(id);;
 	}
