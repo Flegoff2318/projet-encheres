@@ -68,6 +68,7 @@ Date date = Date.valueOf(article.getDateFinEncheres());
 							<c:if
 								test="${utilisateur != article.utilisateur && article.etatVente==1}">
 								<form action="" method="post">
+								<p>Mes crédits : ${sessionScope.utilisateur.credit}</p>
 									<label class="ml-3" for="proposition">Ma proposition :
 									</label> <input class="ml-3" type="number" id="proposition"
 										name="proposition"
