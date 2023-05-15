@@ -1,5 +1,6 @@
 package ihm;
 
+import bll.BLLException;
 import bll.SecurityService;
 import bll.UtilisateurManager;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ public class CreerCompteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String pseudo = request.getParameter("pseudo");
-    		String nom = request.getParameter("rue");
+    		String nom = request.getParameter("nom");
     		String prenom = request.getParameter("prenom");
     		String email = request.getParameter("email");
     		String telephone = request.getParameter("telephone");
@@ -35,12 +36,19 @@ public class CreerCompteServlet extends HttpServlet {
 				//BCrypt				
 				Utilisateur nouvelUtilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codepostal, ville, motDePasse,false);
 //				UtilisateurManager.getInstance().ajouterUtilisateur(nouvelUtilisateur);
-				
-				SecurityService.getInstance().addUser(nouvelUtilisateur);
-				request.setAttribute("message","votre compte à bien été créé !");
-				response.sendRedirect(request.getContextPath()+"/connexion");
+
+				try {
+					SecurityService.getInstance().addUser(nouvelUtilisateur);
+					request.setAttribute("message","votre compte à bien été créé !");
+					response.sendRedirect(request.getContextPath()+"/connexion");
+				} catch (BLLException e) {
+					request.setAttribute("erreurs",e.getMessages());
+					request.setAttribute("utilisateur",nouvelUtilisateur);
+					request.getRequestDispatcher("/WEB-INF/encheres/creer-compte.jsp").forward(request,response);
+				}
+
 			}else{
-				request.setAttribute("erreur","le mot de passe ne correspond pas.");
+				request.setAttribute("match","le mot de passe ne correspond pas.");
 				request.getRequestDispatcher("/WEB-INF/encheres/creer-compte.jsp").forward(request,response);
 			}
 
