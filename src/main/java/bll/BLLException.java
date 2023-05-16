@@ -20,7 +20,7 @@ public class BLLException extends Exception{
     }
 
     public String getMessages(){
-        return errors.toString();
+        return errors.toString().replace("[", "").replace("]", "");
     }
 
     @Override

@@ -64,7 +64,7 @@ public class SecurityService {
 	}
 
 	public void verifChamps(Utilisateur utilisateur,BLLException be){
-		String regexLettres = "^[a-zA-Z]+$";
+		String regexLettres = "^\\p{L}+$";
 		String regexAlphanumeric = "^[a-zA-Z0-9]+$";
 		// Regex numérique utilisé pour le téléphone, uniquement des chiffres, pas de tirets ni d'espaces.
 		String regexNumeric = "^[0-9]+$";

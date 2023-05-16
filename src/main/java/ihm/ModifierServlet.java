@@ -1,5 +1,6 @@
 package ihm;
 
+import bll.BLLException;
 import bll.UtilisateurManager;
 import bo.Utilisateur;
 import jakarta.servlet.ServletException;
@@ -34,9 +35,14 @@ public class ModifierServlet extends HttpServlet {
         Utilisateur oldUser = (Utilisateur) session.getAttribute("utilisateur");
         if(motDePasse.equals(confirmation)){
             Utilisateur newUser = new Utilisateur(oldUser.getNoUtilisateur(),pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse, oldUser.getCredit(), oldUser.isAdministrateur());
-            UtilisateurManager.getInstance().modifierUtilisateur(newUser);
-            session.setAttribute("utilisateur",newUser);
-            response.sendRedirect(request.getContextPath());
+            try {
+                UtilisateurManager.getInstance().modifierUtilisateur(newUser);
+                session.setAttribute("utilisateur",newUser);
+                response.sendRedirect(request.getContextPath());
+            } catch (BLLException e) {
+                request.setAttribute("erreurs",e.getMessages());
+                request.getRequestDispatcher("/WEB-INF/encheres/modifier-profil.jsp").forward(request,response);
+            }
         }else{
             request.setAttribute("erreur","Les mots de passe ne correspondent pas.");
             request.getRequestDispatcher("/WEB-INF/encheres/modifier-profil.jsp").forward(request,response);
