@@ -17,7 +17,7 @@
 				<div class="row mt-3 justify-content-md-center">
 					<div class="col col-lg-4 mt-5">
 						<img alt="placeholder"
-							src="https://placehold.co/300x300/green/white">
+							src="https://placehold.co/300x300/green/white" id="imgarticle">
 					</div>
 					<form class="col col-lg-4" action="" method="post">
 						<div class="row justify-content-md-left">
@@ -106,5 +106,58 @@
 		</div>
 	</main>
 	<%@include file="fragments/footer.jsp"%>
+    <script>
+        function displayImage(input, maxWidth, maxHeight) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    // récupération de l'élément img par id "imgarticle"
+                    let imgElement = document.getElementById("imgarticle");
+                    // création d'un canvas
+                    let canvas = document.createElement("canvas");
+                    // changement du contexte en 2d
+                    let context = canvas.getContext("2d");
+
+                    // création d'une nouvelle image
+                    let img = new Image();
+                    // attribution d'une fonction anonyme au chargement de l'image
+                    img.onload = function() {
+                        let width = img.width;
+                        let height = img.height;
+
+                        // On viens modifier la taille de l'image si elle dépasse la taille
+                        // passée en paramètres
+                        if (width > maxWidth || height > maxHeight) {
+                            if (width / maxWidth > height / maxHeight) {
+                                height *= maxWidth / width;
+                                width = maxWidth;
+                            } else {
+                                // Sinon, on ajuste la largeur en fonction de la hauteur
+                                // pour ne pas dépasser la taille maximale
+                                width *= maxHeight / height;
+                                height = maxHeight;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        context.drawImage(img, 0, 0, width, height);
+
+                        imgElement.src = canvas.toDataURL();
+                    };
+
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Call the displayImage function when the file input changes
+        let fileInput = document.getElementById("photo"); // "photo" is the ID attribute of the file input element
+        fileInput.addEventListener("change", function() {
+            displayImage(this, 300, 300); // Specify the desired maximum width and height
+        });
+
+    </script>
 </body>
 </html>

@@ -20,6 +20,7 @@ public class ArticleVendu {
     private int etatVente;
     private Utilisateur utilisateur;
     private Categorie categorie;
+	private String adresseImage;
     
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 			int miseAPrix, int prixVente, int etatVente, Utilisateur utilisateur, Categorie categorie) {		
@@ -34,5 +35,17 @@ public class ArticleVendu {
 		this.categorie = categorie;
 	}
     
-    
+    public ArticleVendu(int noArticle,String nomArticle, String description,LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+						int miseAPrix, int prixVente, int etatVente, Utilisateur utilisateur, Categorie categorie){
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
 }

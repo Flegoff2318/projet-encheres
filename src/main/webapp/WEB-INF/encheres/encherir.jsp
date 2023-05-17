@@ -21,7 +21,7 @@ Date date = Date.valueOf(article.getDateFinEncheres());
 			<div class="grid">
 				<div class="row mt-5 justify-content-md-center">
 					<div class="col col-lg-4">
-						<img src="https://placehold.co/300x300/green/white"
+						<img src="${article.adresseImage != null ? article.adresseImage : 'https://placehold.co/300x300/green/white'}"
 							alt="placeholder">
 					</div>
 					<div class="col col-lg-4">

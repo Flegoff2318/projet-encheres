@@ -27,8 +27,9 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			+ "prix_vente,"
 			+ "etat_vente,"
 			+ "no_utilisateur,"
-			+ "no_categorie"
-			+ ") VALUES (?,?,?,?,?,?,?,?,?); ";
+			+ "no_categorie,"
+			+ "adresse_image"
+			+ " ) VALUES (?,?,?,?,?,?,?,?,?,?); ";
 	
 	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?;";
 	private static final String DELETE_ARTICLES_UTILISATEUR = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ?;";
@@ -47,7 +48,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 	private static final String SELECT_ALL_ARTICLE = 
 			"SELECT no_article, nom_article, description, "
 			+ "date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, a.no_utilisateur, "
-			+ "a.no_categorie, etat_vente, pseudo, nom, prenom, email, "
+			+ "a.no_categorie, etat_vente, adresse_image, pseudo, nom, prenom, email, "
 			+ "telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, "
 			+ "libelle "
 			+ "FROM ARTICLES_VENDUS a "
@@ -95,6 +96,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 			pStmt.setInt(7, articleVendu.getEtatVente());
 			pStmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
 			pStmt.setInt(9, articleVendu.getCategorie().getNoCategorie());
+			pStmt.setString(10,articleVendu.getAdresseImage());
 		
 			pStmt.executeUpdate();
 			ResultSet rs = pStmt.getGeneratedKeys();
@@ -273,7 +275,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO{
 					rs.getInt("prix_vente"),
 					rs.getInt("etat_vente"),
 					u,
-					cat					
+					cat,
+					rs.getString("adresse_image")
 					 ));						
 		}
 		return articlesVendus;

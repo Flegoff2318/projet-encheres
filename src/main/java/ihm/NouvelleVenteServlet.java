@@ -5,7 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import bo.ArticleVendu;
 import bo.Categorie;
 import bo.Retrait;
 import bo.Utilisateur;
+import jakarta.servlet.http.Part;
 
 @WebServlet("/nouvelle-vente")
 public class NouvelleVenteServlet extends HttpServlet {
@@ -36,7 +38,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 		int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
 		LocalDate dateDebutEncheres = LocalDate.parse(request.getParameter("dateDebutEncheres"));
 		LocalDate dateFinEncheres = LocalDate.parse(request.getParameter("dateFinEncheres"));
-		
+		//Image
+		String adresseImage = stockerImage(request);
 		//utilisateur
 		Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		
@@ -50,7 +53,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		
-		ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, miseAPrix, 0, utilisateur, categorie);	
+		ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, miseAPrix, 0, utilisateur, categorie);
+		article.setAdresseImage(adresseImage); // TODO modifier le constructeur pour éviter cette étape (optionnel)
 		Retrait retrait = new Retrait(article, rue, codePostal, ville);
 		
 		try {
@@ -61,5 +65,11 @@ public class NouvelleVenteServlet extends HttpServlet {
 		}
 		response.sendRedirect(request.getContextPath()+"");
 	}
+
+	public String stockerImage(HttpServletRequest request) throws ServletException, IOException {
+		return null;
+	}
+
+
 
 }

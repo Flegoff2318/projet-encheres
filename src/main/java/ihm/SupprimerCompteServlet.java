@@ -1,16 +1,10 @@
 package ihm;
 
-import bll.ArticleVenduManager;
-import bll.EnchereManager;
-import bll.RetraitManager;
-import bll.UtilisateurManager;
+import bll.*;
 import bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 @WebServlet("/profil/supprimer")
@@ -22,6 +16,7 @@ public class SupprimerCompteServlet extends HttpServlet {
 		if(utilisateur!=null){
 			int noUtilisateur = utilisateur.getNoUtilisateur();
 			supprimerUtilisateur(noUtilisateur);
+			supprimerCookies(utilisateur,request,response);
 			session.invalidate();
 		}
 		response.sendRedirect(request.getContextPath());
@@ -43,5 +38,17 @@ public class SupprimerCompteServlet extends HttpServlet {
 		EnchereManager.getInstance().supprimerEnchereParUtilisateur(noUtilisateur);
 		ArticleVenduManager.getInstance().supprimerArticlesUtilisateur(noUtilisateur);
 		UtilisateurManager.getInstance().supprimerUtilisateur(noUtilisateur);
+	}
+
+	public void supprimerCookies(Utilisateur utilisateur,HttpServletRequest request,HttpServletResponse response){
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie:cookies
+		) {
+			if(cookie.getName().equals("userToken") || cookie.getName().equals("passToken")){
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
+		}
+		TokenManager.getInstance().supprimerToken(utilisateur.getNoUtilisateur());
 	}
 }

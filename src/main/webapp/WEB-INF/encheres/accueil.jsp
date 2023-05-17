@@ -109,7 +109,7 @@
 							<div class="col-4">
 								<div>
 									<img alt="placeholder"
-										src="https://placehold.co/300x300/green/white">
+										src="${article.adresseImage != null ? article.adresseImage : 'https://placehold.co/300x300/green/white'}">
 								</div>
 								<div class="p-3 mb-5" style="width: 300px; background-color : rgb(102, 102, 153)">
 									<p>Vente en cours :
@@ -134,7 +134,7 @@
 							<div class="col-4">
 								<div>
 									<img alt="placeholder"
-										src="https://placehold.co/300x300/green/white">
+										src="${article.adresseImage != null ? article.adresseImage : 'https://placehold.co/300x300/green/white'}">
 								</div>
 								<div class="p-3 bg-secondary mb-5" style="width: 300px;">
 									<p>Non débuté : 
@@ -159,7 +159,7 @@
 							<div class="col-4">
 								<div>
 									<img alt="placeholder"
-										src="https://placehold.co/300x300/green/white">
+										src="${article.adresseImage != null ? article.adresseImage : 'https://placehold.co/300x300/green/white'}">
 								</div>
 								<div class="p-3 mb-5" style="width: 300px; background-color : rgb(38, 115, 77)">
 									<p>${article.etatVente==2?"Vente terminée :":"Article récupéré :"}
